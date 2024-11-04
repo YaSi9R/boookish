@@ -56,7 +56,7 @@ const Navbar = () => {
             className={`flex h-15 items-center justify-center border-b-[1px] border-b-white ${location.pathname !== "/" ? "bg-white" : ""
                 } transition-all duration-200`}
         >
-            <div className="flex w-[100%] pl-4 items-center justify-between">
+            <div className="flex w-[100%]  pl-1 md:pl-4 items-center justify-between">
                 {/* Logo */}
                 <Link to="/">
                     <img src={logo} alt="Logo" width={190} height={40} loading="lazy" />
