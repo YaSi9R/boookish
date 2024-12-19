@@ -28,6 +28,15 @@ body {
   border-radius: 10px;
   visibility: hidden;
 }
+.scrollbar-hide {
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
 
 *:active::-webkit-scrollbar-thumb,
 *:focus::-webkit-scrollbar-thumb,
