@@ -103,14 +103,18 @@ useEffect(() => {
 }, []);
 
 return (
-  <div className="container bg-[#f0f0f0] py-10 relative">
+  <div className="container bg-[#f0f0f0] py-10 relative " style={{
+    background: `rgba(240, 240, 240, 1)  center center / cover no-repeat`,
+    minHeight: '650px', // Increase height here
+  }}>
+
     <div className="w-9/12 mx-auto py-6">
       <h2 className="text-2xl antialiased text-left my-6 flex flex-col">
         Buy Second Hand Books
         <span className="w-[260px] h-[4px] my-10 overflow-hidden bg-[#b62323] mt-2 rounded-sm"></span>
       </h2>
 
-      <div className="relative">
+      <div className="relative ">
         {/* Left Button */}
         <button
           className="absolute left-[-50px] top-1/2 transform -translate-y-1/2 bg-[#E74C3C] shadow-lg p-2 rounded-lg hover:bg-gray-200 z-10"
@@ -128,7 +132,7 @@ return (
           {extendedBooks.map((book, index) => (
             <div
               key={index}
-              className="card flex flex-col justify-between shadow hover:shadow-md cursor-pointer rounded-lg bg-transparent min-w-[250px]"
+              className="card flex flex-col justify-between shadow hover:shadow-md cursor-pointer rounded-lg bg-white min-w-[250px]"
               style={{
                 boxShadow:
                   'rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px',

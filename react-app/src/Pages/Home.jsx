@@ -1,10 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import backgroundImage from '../assets/Images/website-background.png';
+import sectionImage from '../assets/Images/middle_Bg.jpg';
 import SellButton from '../Components/Core/SellButton';
 import { useState } from 'react';
 import CategoryCards from '../Components/Core/CategoryCards';
 import FeaturedBooks from '../Components/Core/FeaturedBooks';
 import SecondHandBooks from '../Components/Core/SecondHandBooks';
+
+import { FaHandHoldingHeart } from "react-icons/fa";
+import { FaAngleDoubleRight } from "react-icons/fa";
+import { PiHandHeartThin } from "react-icons/pi";
+
+
+
 
 const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -95,16 +104,76 @@ const Home = () => {
       </div>
 
       <div>
-        <SecondHandBooks/>
+        <SecondHandBooks />
       </div>
-     
+
+
+      
+      {/* Middle Background Section */}
+      <div
+        className="parallex section-padding relative w-full h-[280px] flex items-center justify-center"
+        style={{
+          background: `rgba(0, 0, 0, 0) url(${sectionImage}) center center no-repeat`,
+          WebkitBackgroundSize: "cover",
+          MozBackgroundSize: "cover",
+          OBackgroundSize: "cover",
+          backgroundSize: "cover",
+        }}
+      >
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black bg-opacity-70"></div>
+
+        {/* Content */}
+        <div className="container mx-[150px] relative z-10 px-6 text-white text-center">
+          {/* Row Section */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            {/* Left Section */}
+            <div className="flex items-center gap-6 text-center md:text-left">
+              <div className="text-8xl mt-4">
+              <PiHandHeartThin />
+              </div>
+              <div className='mt-5 ml-4'>
+                <h4 className="italic text-4xl font-medium antialiased mb-4">
+                  Where to sell used second-hand books?
+                </h4>
+                <p className="text-base  font-light">
+                  Post an Ad now and one of you will be lucky to have your ad
+                  featured. Featured Ads get more buyer interaction.
+                </p>
+              </div>
+            </div>
+
+            {/* Right Section */}
+            <div className="flex justify-center md:justify-end w-[200px] h-[60px]">
+              <Link
+                to="./sellBooks"
+                className="btn bg-[#E74C3C] text-white px-4   inline-flex items-center hover:bg-[#b52417] transition text-lg"
+              >
+                Post Free Ad <FaAngleDoubleRight className="ml-1" />
+              </Link>
+            </div>
 
 
 
 
-      <button className="fixed bottom-5 right-5 bg-[#E74C3C] text-white py-3 px-6 rounded-full hover:bg-[#b52417]">
-        Sell Books
-      </button>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div>
+        <SecondHandBooks />
+      </div>
+
+
+
+
+      <Link to="./sellBooks">
+        <button className="fixed bottom-5 right-5 bg-[#E74C3C] text-white py-3 px-6 rounded-full hover:bg-[#b52417]" link to="./sellBooks">
+          Sell Books
+        </button></Link>
+
 
 
     </>
