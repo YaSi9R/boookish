@@ -7,6 +7,13 @@ import { useState } from 'react';
 import CategoryCards from '../Components/Core/CategoryCards';
 import FeaturedBooks from '../Components/Core/FeaturedBooks';
 import SecondHandBooks from '../Components/Core/SecondHandBooks';
+import Buyoldbooks from '../Components/Core/Buyoldbooks';
+// import FooterBackground from '../Components/Common/FooterBackground';
+
+
+
+
+
 
 import { FaHandHoldingHeart } from "react-icons/fa";
 import { FaAngleDoubleRight } from "react-icons/fa";
@@ -165,6 +172,18 @@ const Home = () => {
       <div>
         <SecondHandBooks />
       </div>
+
+
+
+
+      <div>
+        <Buyoldbooks />
+      </div>
+
+      <div>
+        {/* <FooterBackground /> */}
+      </div>
+
 
 
 

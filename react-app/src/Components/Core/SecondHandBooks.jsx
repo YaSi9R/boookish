@@ -150,7 +150,7 @@ return (
                 <h3 className="text-lg font-light antialiased">
                   {book.title.length > 20
                     ? `${book.title.slice(0, 30)}...`
-                    : book.title}
+                    : book.title } 
                 </h3>
               </div>
               <div className="px-2 py-2 mt-4">
