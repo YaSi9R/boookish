@@ -10,40 +10,42 @@ import { apiConnector } from "../../services/apiConnector"
 import SellButton from '../Core/SellButton'
 import { FaChevronDown } from "react-icons/fa";
 
-// import { categories } from "../../services/apis"
-// import { ACCOUNT_TYPE } from "../../utils/constants"
-// import ProfileDropdown from "../core/Auth/ProfileDropdown"
-// import SideBar from "../core/HomePage/SideBar"
+
 
 const Navbar = () => {
 
+    const serviceDropdown = [
+        { name: "Fiction", path: "/usedBooks/fiction" },
+        { name: "Non-Fiction", path: "/usedBooks/non-fiction" },
+        { name: "Educational", path: "/usedBooks/educational" },
+    ];
 
+    const CompetitiveDropdown = [
+        { name: "UPSC", path: "/competitivebooks/upsc" },
+        { name: "JEE", path: "/competitivebooks/jee" },
+        { name: "NEET", path: "/competitivebooks/neet" },
+    ];
+
+    // Main navigation links
+    const NavbarLinks = [
+        { title: "Home", path: "/" },
+        { title: "Used Books On Sale", submenu: serviceDropdown },
+        { title: "Competitive Exam Books", submenu: CompetitiveDropdown },
+        { title: "Novels", path: "/novels" },
+        { title: "Book Reviews", path: "/bookreviews" },
+    ];
 
 
 
 
     const { token } = useSelector((state) => state.auth)
     const { user } = useSelector((state) => state.profile)
-    // const { totalItems } = useSelector((state) => state.cart)
 
     const location = useLocation()
 
     const [loading, setLoading] = useState(false)
 
-    //   useEffect(() => {
-    //     ; (async () => {
-    //       setLoading(true)
-    //       try {
-    //         const res = await apiConnector("GET", categories.CATEGORIES_API)
-    //         setSubLinks(res.data.data)
-    //       } catch (error) {
-    //         console.log("Could not fetch Categories.", error)
-    //       }
-    //       setLoading(false)
-    //     })()
-    //   }, [])
 
-    // console.log("sub links", subLinks)
 
     const matchRoute = (route) => {
         return matchPath({ path: route }, location.pathname)
@@ -65,7 +67,7 @@ const Navbar = () => {
                 </Link>
                 {/* Navigation links */}
                 <nav className="hidden md:block">
-                    <ul className="flex gap-x-6 text-black">
+                    {/* <ul className="flex gap-x-6 text-black">
                         {NavbarLinks.map((link, index) => (
                             <li key={index}>
                                 {link.title === "Catalog" ? (
@@ -80,30 +82,7 @@ const Navbar = () => {
                                             <FaChevronDown />
                                             <div className="invisible absolute left-[50%] top-[50%] z-[1000] flex w-[200px] translate-x-[-50%] translate-y-[3em] flex-col rounded-lg bg-richblack-5 p-4 text-richblack-900 opacity-0 transition-all duration-150 group-hover:visible group-hover:translate-y-[1.65em] group-hover:opacity-100 lg:w-[300px]">
                                                 <div className="absolute left-[50%] top-0 -z-10 h-6 w-6 translate-x-[80%] translate-y-[-40%] rotate-45 select-none rounded bg-richblack-5"></div>
-                                                {/* {loading ? (
-                                                    <p className="text-center">Loading...</p>
-                                                ) : subLinks.length ? (
-                                                    <>
-                                                        {subLinks
-                                                            ?.filter(
-                                                                (subLink) => subLink?.courses?.length > 0
-                                                            )
-                                                            ?.map((subLink, i) => (
-                                                                <Link
-                                                                    to={`/catalog/${subLink.name
-                                                                        .split(" ")
-                                                                        .join("-")
-                                                                        .toLowerCase()}`}
-                                                                    className="rounded-lg bg-transparent py-4 pl-4 hover:bg-richblack-50"
-                                                                    key={i}
-                                                                >
-                                                                    <p>{subLink.name}</p>
-                                                                </Link>
-                                                            ))}
-                                                    </>
-                                                ) : (
-                                                    <p className="text-center">No Courses Found</p>
-                                                )} */}
+
                                             </div>
                                         </div>
                                     </>
@@ -116,13 +95,46 @@ const Navbar = () => {
                                                 }`}
                                         >
                                             {link.title}
-                                            
+
                                         </p>
                                     </Link>
                                 )}
                             </li>
                         ))}
+                    </ul> */}
+                    <ul className="flex gap-x-6 text-black">
+                        {NavbarLinks.map((link, index) => (
+                            <li key={index} className="relative group">
+                                {/* Dropdown for specific links */}
+                                {link.submenu ? (
+                                    <div className="flex cursor-pointer items-center gap-1 text-black">
+                                        <p>{link.title}</p>
+                                        <FaChevronDown />
+
+                                        {/* Dropdown Menu */}
+                                        <div className="invisible absolute left-0 top-full z-50 mt-2 w-48 flex flex-col rounded-lg bg-white p-4 text-black shadow-lg opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100">
+                                            {link.submenu.map((sublink, subIndex) => (
+                                                <Link
+                                                    key={subIndex}
+                                                    to={sublink.path}
+                                                    className="py-2 hover:bg-gray-200 block"
+                                                >
+                                                    {sublink.name}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ) : (
+                                    // Normal links
+                                    <Link to={link.path} className="text-black hover:text-red-500">
+                                        {link.title}
+                                    </Link>
+                                )}
+                            </li>
+                        ))}
                     </ul>
+
+
                 </nav>
                 {/* Login / Signup / Dashboard */}
                 <div className="hidden items-center gap-x-4 md:flex">
@@ -140,18 +152,13 @@ const Navbar = () => {
                             </button>
                         </Link>
                     )}
-                    {/* {token !== null && <ProfileDropdown />} */}
-                    <SellButton/>
+                    <SellButton />
                 </div>
 
                 {/* Mobile dropdown */}
                 <button className="mr-4 md:hidden" onClick={() => setOpen(!open)}>
                     {open ? <AiOutlineClose fontSize={24} fill="#AFB2BF" /> : <AiOutlineMenu fontSize={24} fill="#AFB2BF" />}
-                    {/* {open ? (
-                <AiOutlineClose fontSize={24} fill="#AFB2BF" />
-              ) : (
-                <AiOutlineMenu fontSize={24} fill="#AFB2BF" />
-              )} */}
+
 
                 </button>
 
@@ -165,16 +172,9 @@ const Navbar = () => {
                     <button className="absolute top-4 right-8 z-50" onClick={toggleOpen}>
 
                     </button>
-                    {/* <SideBar
-                        NavbarLinks={NavbarLinks}
-                        matchRoute={matchRoute}
-                        loading={loading}
-                        subLinks={subLinks}
-                        toggleOpen={toggleOpen}
-                    /> */}
+
                 </div>
             )}
-            {/* <SideBar open={open} toggleOpen={toggleOpen} NavbarLinks={NavbarLinks} matchRoute={matchRoute} /> */}
 
         </div>
     )
