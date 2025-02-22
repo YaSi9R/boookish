@@ -15,7 +15,7 @@ function FooterBackground() {
       description: "Register via Bookish app or web. You can create account socially also.",
       icon: <IoLogoAndroid className="text-white text-5xl" />,
       color: "bg-[#FFA500]",
-      imgSrc: { greenImg },
+      imgSrc: yellowImg,
     },
     {
       id: 2,
@@ -23,7 +23,7 @@ function FooterBackground() {
       description: "Fill required details and submit book ad you want to sell.",
       icon: <FaBook className="text-white text-4xl" />,
       color: "bg-[#9C27B0]",
-      imgSrc: { yellowImg },
+      imgSrc: greenImg,
     },
     {
       id: 3,
@@ -31,10 +31,11 @@ function FooterBackground() {
       description: "Wherever you stuck in process, just tap on floating chat icon on bottom left.",
       icon: <FaHeadset className="text-white text-4xl" />,
       color: "bg-[#4CAF50]",
-      imgSrc: { greenImg },
+      imgSrc: greenImg,
     },
   ];
   return (
+    <>
 
     <div className="flex flex-col items-center text-center p-8">
       <h2 className="text-3xl font-light mb-8">
@@ -46,52 +47,71 @@ function FooterBackground() {
 
 
       <div className="grid md:grid-cols-3 gap-8 w-full max-w-5xl">
-        {steps.map((step) => (
+        {steps.map((step, index) => (
           <div
             key={step.id}
-            className="flex flex-col items-center p-6 rounded-lg "
+            className="flex flex-row items-center p-6 rounded-lg "
           >
 
 
+            <div className='flex flex-col'>
+              <div className={`relative flex  items-center justify-center`}>
+                {/* Full Circle with Border */}
+                <div className={`w-32 h-32 rounded-full flex items-center justify-center relative  ${step.color}`}>
 
-            <div className={`relative flex items-center justify-center`}>
-              {/* Full Circle with Border */}
-              <div className={`w-32 h-32 rounded-full flex items-center justify-center relative overflow-hidden  ${step.color}`}>
+                  {/* Right-Side White Semi-Circle */}
+                  <div className="absolute w-32 h-32 bg-white"
+                    style={{
+                      clipPath: "inset(0 0 0 50%)",  // Hides left half
+                      // borderRadius: "50%",
+                      position: "absolute"
+                    }}>
+                  </div>
 
-                {/* Right-Side White Semi-Circle */}
-                <div className="absolute w-32 h-32 bg-white"
-                  style={{
-                    clipPath: "inset(0 0 0 50%)",  // Hides left half
-                    // borderRadius: "50%",
-                    position: "absolute"
-                  }}>
+                  {/* White Spacer (Ring Effect) */}
+                  <div className="absolute w-28 h-28 bg-white rounded-full"></div>
+
+                  {/* Inner Circle with Icon */}
+                  <div className={`absolute w-24 h-24 rounded-full flex items-center justify-center ${step.color}`}>
+                    <div className="text-white text-2xl">{step.icon}</div>
+                  </div>
+
+                  {/* small circle with id */}
+                  <div className={`absolute w-10 h-10 rounded-full flex items-center justify-center ${step.color} overflow-hidden shadow-md z-10 border border-[5px] border-white`}
+                    style={{
+                      bottom: "4px",  // Position it slightly outside the bottom
+                      right: "10px",   // Move it slightly outside the right
+                    }}>
+                    <div className={`text-xl  text-white font-bold ${step.color}`}>0{step.id}</div>
+                  </div>
+
                 </div>
-
-                {/* White Spacer (Ring Effect) */}
-                <div className="absolute w-28 h-28 bg-white rounded-full"></div>
-
-                {/* Inner Circle with Icon */}
-                <div className={`absolute w-24 h-24 rounded-full flex items-center justify-center ${step.color}`}>
-                  <div className="text-white text-2xl">{step.icon}</div>
-                </div>
-
               </div>
+
+
+
+              <h3 className="text-xl font-light mt-4">{step.title}</h3>
+              <p className="text-[#777777] mt-2">{step.description}</p>
             </div>
 
-
-
-            <h3 className="text-xl font-semibold mt-4">{step.title}</h3>
-            <p className="text-gray-600 mt-2">{step.description}</p>
-            {/* <img
-              src={step.imgSrc}
-              alt={step.title}
-              className="mt-4 w-20 h-20 object-cover"
-            /> */}
-            {/* <p className="text-lg font-bold text-gray-500 mt-2">0{step.id}</p> */}
+            
           </div>
         ))}
       </div>
     </div>
+
+
+
+
+
+
+// Buttom container 
+
+
+
+
+
+</>
   );
 };
 
