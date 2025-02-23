@@ -8,7 +8,6 @@ import CategoryCards from '../Components/Core/CategoryCards';
 import FeaturedBooks from '../Components/Core/FeaturedBooks';
 import SecondHandBooks from '../Components/Core/SecondHandBooks';
 import Buyoldbooks from '../Components/Core/Buyoldbooks';
-import FooterBackground from '../Components/Common/FooterBackground';
 
 
 
@@ -180,13 +179,8 @@ const Home = () => {
         <Buyoldbooks />
       </div>
 
-      <div>
-        <footerCommon/>
-
-      </div>
-      <div>
-        <FooterBackground />
-      </div>
+     
+     
 
      
 

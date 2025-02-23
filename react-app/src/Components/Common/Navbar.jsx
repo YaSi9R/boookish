@@ -14,24 +14,38 @@ import { FaChevronDown } from "react-icons/fa";
 
 const Navbar = () => {
 
-    const serviceDropdown = [
-        { name: "Fiction", path: "/usedBooks/fiction" },
-        { name: "Non-Fiction", path: "/usedBooks/non-fiction" },
-        { name: "Educational", path: "/usedBooks/educational" },
-    ];
-
     const CompetitiveDropdown = [
-        { name: "UPSC", path: "/competitivebooks/upsc" },
-        { name: "JEE", path: "/competitivebooks/jee" },
-        { name: "NEET", path: "/competitivebooks/neet" },
+        { name: "CAT/GATE/GRE BOOKS", path: "/usedBooks/catgrebooks " },
+        { name: "ENGINEERING BOOKS", path: "/usedBooks/engineeringexambooks" },
+        { name: "NEET/AIIMS BOOKS", path: "/usedBooks/neetaiimsbooks" },
+        { name: "UPSC BOOKS", path: "/usedBooks/upscbooks" },
+
+
     ];
+    
+    const  serviceDropdown= [
+        { name: "SCHOOL BOOKS", path: "/competitivebooks/schoolbooks" },
+        { name: "COLLEGE BOOKS", path: "/competitivebooks/collegebooks" },
+        { name: "MEDICAL", path: "/competitivebooks/medical" },
+        { name: "ENGINEERING", path: "/competitivebooks/engineering" },
+        { name: "OTHERS", path: "/competitivebooks/others" },
+
+
+        
+    ];
+    const novelDropdown = [
+        { name: "Fiction", path: "/novelbooks/fiction" },
+        { name: "Non-Fiction", path: "/novelbooks/nonfiction" },
+
+
+    ]
 
     // Main navigation links
     const NavbarLinks = [
         { title: "Home", path: "/" },
         { title: "Used Books On Sale", submenu: serviceDropdown },
         { title: "Competitive Exam Books", submenu: CompetitiveDropdown },
-        { title: "Novels", path: "/novels" },
+        { title: "Novels", submenu: novelDropdown },
         { title: "Book Reviews", path: "/bookreviews" },
     ];
 
@@ -67,41 +81,7 @@ const Navbar = () => {
                 </Link>
                 {/* Navigation links */}
                 <nav className="hidden md:block">
-                    {/* <ul className="flex gap-x-6 text-black">
-                        {NavbarLinks.map((link, index) => (
-                            <li key={index}>
-                                {link.title === "Catalog" ? (
-                                    <>
-                                        <div
-                                            className={`group relative flex cursor-pointer items-center gap-1 ${matchRoute("/catalog/:catalogName")
-                                                ? "text-yellow-25"
-                                                : "text-richblack-25"
-                                                }`}
-                                        >
-                                            <p>{link.title}</p>
-                                            <FaChevronDown />
-                                            <div className="invisible absolute left-[50%] top-[50%] z-[1000] flex w-[200px] translate-x-[-50%] translate-y-[3em] flex-col rounded-lg bg-richblack-5 p-4 text-richblack-900 opacity-0 transition-all duration-150 group-hover:visible group-hover:translate-y-[1.65em] group-hover:opacity-100 lg:w-[300px]">
-                                                <div className="absolute left-[50%] top-0 -z-10 h-6 w-6 translate-x-[80%] translate-y-[-40%] rotate-45 select-none rounded bg-richblack-5"></div>
-
-                                            </div>
-                                        </div>
-                                    </>
-                                ) : (
-                                    <Link to={link?.path}>
-                                        <p
-                                            className={`${matchRoute(link?.path)
-                                                ? "text-[#E74C3C] "
-                                                : "text-black"
-                                                }`}
-                                        >
-                                            {link.title}
-
-                                        </p>
-                                    </Link>
-                                )}
-                            </li>
-                        ))}
-                    </ul> */}
+                   
                     <ul className="flex gap-x-6 text-black">
                         {NavbarLinks.map((link, index) => (
                             <li key={index} className="relative group">
@@ -112,12 +92,13 @@ const Navbar = () => {
                                         <FaChevronDown />
 
                                         {/* Dropdown Menu */}
-                                        <div className="invisible absolute left-0 top-full z-50 mt-2 w-48 flex flex-col rounded-lg bg-white p-4 text-black shadow-lg opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100">
+                                        <div className="invisible absolute left-0 top-full z-50 mt-2 w-[250px] flex flex-col rounded-lg bg-white  text-black shadow-lg opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100">
                                             {link.submenu.map((sublink, subIndex) => (
                                                 <Link
                                                     key={subIndex}
                                                     to={sublink.path}
-                                                    className="py-2 hover:bg-gray-200 block"
+                                                    className="py-4 pl-3 block transition-all duration-400 ease-in-out text-sm hover:bg-[#b52417] hover:text-white"
+
                                                 >
                                                     {sublink.name}
                                                 </Link>
@@ -126,9 +107,14 @@ const Navbar = () => {
                                     </div>
                                 ) : (
                                     // Normal links
-                                    <Link to={link.path} className="text-black hover:text-red-500">
+                                    <Link
+                                        to={link.path}
+                                        className={` ${matchRoute(link?.path) ? "text-[#E74C3C]" : "text-black"
+                                            }`}
+                                    >
                                         {link.title}
                                     </Link>
+
                                 )}
                             </li>
                         ))}
