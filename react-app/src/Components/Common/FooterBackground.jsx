@@ -2,8 +2,9 @@ import React from 'react';
 import greenImg from "../../assets/iconsImage/green.png";
 import yellowImg from "../../assets/iconsImage/yellow.png";
 import { IoLogoAndroid } from "react-icons/io";
+import { Link } from 'react-router-dom';
 
-import { FaHeadset, FaFacebook, FaInstagram, FaTwitter, FaHeart, FaBook } from "react-icons/fa";
+import { FaHeadset, FaFacebook, FaInstagram, FaTwitter, FaHeart, FaBook,FaComments } from "react-icons/fa";
 
 
 
@@ -166,11 +167,32 @@ function FooterBackground() {
 
 
         </div>
+
+
+
+
+
+
+
       </footer>
 
 
+      <div className="relative">
+      <Link to="./support" className="flex items-center gap-2 absolute bottom-5 left-5">
+      
+       
 
-
+        {/* Circular Chat Icon */}
+        <button className="w-12 h-12 bg-[#E74C3C] text-white rounded-full flex items-center justify-center hover:bg-[#b52417] shadow-lg">
+          <FaComments className="text-xl" />
+        </button>
+        
+          {/* Message bubble */}
+        <span className="bg-[#E74C3C] text-white px-3 py-2 rounded-lg shadow-lg text-sm">
+          Chat With Us!
+        </span>
+      </Link>
+    </div>
 
     </>
   );

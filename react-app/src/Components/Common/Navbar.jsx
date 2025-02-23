@@ -4,23 +4,13 @@ import { AiOutlineMenu, AiOutlineClose, AiOutlineShoppingCart } from "react-icon
 import { useSelector } from "react-redux"
 import { Link, matchPath, useLocation } from "react-router-dom"
 import logo from "../../assets/logo/Bookish-logo1.png"
-import { NavbarLinks,CompetitiveDropdown,serviceDropdown } from "../../data/navbar-links"
-import { apiConnector } from "../../services/apiConnector"
+import {CompetitiveDropdown,serviceDropdown ,novelDropdown} from "../../data/navbar-links"
 import SellButton from '../Core/SellButton'
 import { FaChevronDown } from "react-icons/fa";
 
 
 
 const Navbar = () => {
-
-
-  
-    const novelDropdown = [
-        { name: "Fiction", path: "/novelbooks/fiction" },
-        { name: "Non-Fiction", path: "/novelbooks/nonfiction" },
-
-
-    ]
 
     // Main navigation links
     const NavbarLinks = [

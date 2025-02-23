@@ -1,7 +1,7 @@
 import './App.css';
 import Navbar from './Components/Common/Navbar';
 import { Route, Routes, useNavigate } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
+import { FaBookMedical  } from 'react-icons/fa';
 import Login from './Pages/Login';
 import Signup from './Pages/Signup';
 import OpenRoute from './Components/Core/Auth/OpenRoute';
@@ -43,10 +43,13 @@ function App() {
       <FooterBackground/>
 
 
-       <Link to="./sellBooks">
-              <button className="fixed bottom-5 right-5 bg-[#E74C3C] text-white py-3 px-6 rounded-full hover:bg-[#b52417]" link to="./sellBooks">
-                Sell Books
-              </button></Link>
+      <Link to="./sellBooks">
+      <button className="fixed bottom-10 right-10 w-[80px] h-[80px] bg-[#E74C3C] text-white rounded-full flex flex-col items-center justify-center hover:bg-[#b52417] shadow-lg text-sm font-medium text-center">
+      <FaBookMedical  className="text-lg mt-1" />
+        <span>Sell Books</span>
+        
+      </button>
+    </Link>
     </div>
 
   );
