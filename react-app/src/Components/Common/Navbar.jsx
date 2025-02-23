@@ -1,11 +1,10 @@
 import React from 'react'
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { AiOutlineMenu, AiOutlineClose, AiOutlineShoppingCart } from "react-icons/ai"
-import { BsChevronDown } from "react-icons/bs"
 import { useSelector } from "react-redux"
 import { Link, matchPath, useLocation } from "react-router-dom"
 import logo from "../../assets/logo/Bookish-logo1.png"
-import { NavbarLinks } from "../../data/navbar-links"
+import { NavbarLinks,CompetitiveDropdown,serviceDropdown } from "../../data/navbar-links"
 import { apiConnector } from "../../services/apiConnector"
 import SellButton from '../Core/SellButton'
 import { FaChevronDown } from "react-icons/fa";
@@ -14,25 +13,8 @@ import { FaChevronDown } from "react-icons/fa";
 
 const Navbar = () => {
 
-    const CompetitiveDropdown = [
-        { name: "CAT/GATE/GRE BOOKS", path: "/usedBooks/catgrebooks " },
-        { name: "ENGINEERING BOOKS", path: "/usedBooks/engineeringexambooks" },
-        { name: "NEET/AIIMS BOOKS", path: "/usedBooks/neetaiimsbooks" },
-        { name: "UPSC BOOKS", path: "/usedBooks/upscbooks" },
 
-
-    ];
-    
-    const  serviceDropdown= [
-        { name: "SCHOOL BOOKS", path: "/competitivebooks/schoolbooks" },
-        { name: "COLLEGE BOOKS", path: "/competitivebooks/collegebooks" },
-        { name: "MEDICAL", path: "/competitivebooks/medical" },
-        { name: "ENGINEERING", path: "/competitivebooks/engineering" },
-        { name: "OTHERS", path: "/competitivebooks/others" },
-
-
-        
-    ];
+  
     const novelDropdown = [
         { name: "Fiction", path: "/novelbooks/fiction" },
         { name: "Non-Fiction", path: "/novelbooks/nonfiction" },
@@ -53,11 +35,9 @@ const Navbar = () => {
 
 
     const { token } = useSelector((state) => state.auth)
-    const { user } = useSelector((state) => state.profile)
 
     const location = useLocation()
 
-    const [loading, setLoading] = useState(false)
 
 
 
@@ -68,6 +48,7 @@ const Navbar = () => {
     const [open, setOpen] = useState(false);
     const toggleOpen = () => setOpen(!open);
 
+    const [openDropdown, setOpenDropdown] = useState(null);
 
     return (
         <div
@@ -81,46 +62,48 @@ const Navbar = () => {
                 </Link>
                 {/* Navigation links */}
                 <nav className="hidden md:block">
-                   
                     <ul className="flex gap-x-6 text-black">
                         {NavbarLinks.map((link, index) => (
-                            <li key={index} className="relative group">
-                                {/* Dropdown for specific links */}
+                            <li
+                                key={index}
+                                className="relative group"
+                                onMouseEnter={() => setOpenDropdown(index)} // Open dropdown on hover
+                                onMouseLeave={() => setOpenDropdown(null)} // Close dropdown when mouse leaves
+                            >
+                                {/* Dropdown for links with submenu */}
                                 {link.submenu ? (
                                     <div className="flex cursor-pointer items-center gap-1 text-black">
                                         <p>{link.title}</p>
                                         <FaChevronDown />
 
                                         {/* Dropdown Menu */}
-                                        <div className="invisible absolute left-0 top-full z-50 mt-2 w-[250px] flex flex-col rounded-lg bg-white  text-black shadow-lg opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100">
-                                            {link.submenu.map((sublink, subIndex) => (
-                                                <Link
-                                                    key={subIndex}
-                                                    to={sublink.path}
-                                                    className="py-4 pl-3 block transition-all duration-400 ease-in-out text-sm hover:bg-[#b52417] hover:text-white"
-
-                                                >
-                                                    {sublink.name}
-                                                </Link>
-                                            ))}
-                                        </div>
+                                        {openDropdown === index && (
+                                            <div className="absolute left-0 top-full z-50 pt-2 w-[250px] flex flex-col rounded-lg bg-white text-black shadow-lg">
+                                                {link.submenu.map((sublink, subIndex) => (
+                                                    <Link
+                                                        key={subIndex}
+                                                        to={sublink.path}
+                                                        className="py-4 pl-3 block transition-all duration-400 ease-in-out text-sm hover:bg-[#b52417] hover:text-white"
+                                                        onClick={() => setOpenDropdown(null)} // Close dropdown when clicking an item
+                                                    >
+                                                        {sublink.name}
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                        )}
                                     </div>
                                 ) : (
                                     // Normal links
                                     <Link
                                         to={link.path}
-                                        className={` ${matchRoute(link?.path) ? "text-[#E74C3C]" : "text-black"
-                                            }`}
+                                        className={` ${matchRoute(link?.path) ? "text-[#E74C3C]" : "text-black"}`}
                                     >
                                         {link.title}
                                     </Link>
-
                                 )}
                             </li>
                         ))}
                     </ul>
-
-
                 </nav>
                 {/* Login / Signup / Dashboard */}
                 <div className="hidden items-center gap-x-4 md:flex">

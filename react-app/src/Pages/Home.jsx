@@ -180,19 +180,6 @@ const Home = () => {
       </div>
 
      
-     
-
-     
-
-
-
-
-      <Link to="./sellBooks">
-        <button className="fixed bottom-5 right-5 bg-[#E74C3C] text-white py-3 px-6 rounded-full hover:bg-[#b52417]" link to="./sellBooks">
-          Sell Books
-        </button></Link>
-
-
 
     </>
 

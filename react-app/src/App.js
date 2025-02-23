@@ -8,6 +8,8 @@ import OpenRoute from './Components/Core/Auth/OpenRoute';
 import Error from './Pages/Error';
 import Home from './Pages/Home';
 import FooterBackground from './Components/Common/FooterBackground';
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -39,6 +41,12 @@ function App() {
 
       </Routes>
       <FooterBackground/>
+
+
+       <Link to="./sellBooks">
+              <button className="fixed bottom-5 right-5 bg-[#E74C3C] text-white py-3 px-6 rounded-full hover:bg-[#b52417]" link to="./sellBooks">
+                Sell Books
+              </button></Link>
     </div>
 
   );
