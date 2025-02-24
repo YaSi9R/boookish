@@ -8,6 +8,7 @@ import CategoryCards from '../Components/Core/CategoryCards';
 import FeaturedBooks from '../Components/Core/FeaturedBooks';
 import SecondHandBooks from '../Components/Core/SecondHandBooks';
 import Buyoldbooks from '../Components/Core/Buyoldbooks';
+import BuyNovelsBooks from '../Components/Core/BuyNovels';
 
 
 
@@ -17,6 +18,7 @@ import Buyoldbooks from '../Components/Core/Buyoldbooks';
 // import { FaHandHoldingHeart } from "react-icons/fa";
 import { FaAngleDoubleRight } from "react-icons/fa";
 import { PiHandHeartThin } from "react-icons/pi";
+import BuyNovels from '../Components/Core/BuyNovels';
 
 
 
@@ -169,7 +171,7 @@ const Home = () => {
 
 
       <div>
-        <SecondHandBooks />
+        <BuyNovelsBooks />
       </div>
 
 
