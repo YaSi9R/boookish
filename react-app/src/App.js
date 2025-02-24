@@ -5,7 +5,6 @@ import { FaBookMedical  } from 'react-icons/fa';
 import Login from './Pages/Login';
 import Signup from './Pages/Signup';
 import OpenRoute from './Components/Core/Auth/OpenRoute';
-import Error from './Pages/Error';
 import Home from './Pages/Home';
 import FooterBackground from './Components/Common/FooterBackground';
 import { Link } from 'react-router-dom';
