@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { FaHeart } from "react-icons/fa";
 import image1 from "../../assets/Images/image.jpg";
+import { FaLocationDot } from "react-icons/fa6";
+
 
 
 const books = [
@@ -198,7 +200,7 @@ function BuyNovelsBooks() {
                     <span className="w-[270px] h-[4px]  overflow-hidden bg-[#b62323] mt-2 rounded-sm"></span>
                 </h2>
 
-                <div className="flex justify-start gap-2">
+                <div className="flex justify-start gap-2 mb-[40px]">
                     <button
                         className="px-6 py-3 text-lg font-light transition duration-300"
                         onClick={() => setSelectedCategory("fiction")}
@@ -222,7 +224,7 @@ function BuyNovelsBooks() {
                 </div>
 
 
-                <div className="book-list">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {filteredBooks.map(book => (
                         <div
                             key={book.id}
@@ -237,14 +239,14 @@ function BuyNovelsBooks() {
                                     alt={`${book.title} cover`}
                                     className="w-full h-40 object-cover"
                                 />
-                                <span
+                                {/* <span
                                     className="badge absolute top-[45px] right-[-20px] bg-[#ff2121] text-white text-xs px-6 py-1 transform origin-top-right"
                                     style={{
                                         transform: "rotate(45deg)",
                                     }}
                                 >
                                     Featured
-                                </span>
+                                </span> */}
                                 <button
                                     className="absolute bottom-2 right-2 text-xl focus:outline-none hover:text-white "
                                     onClick={() => handleLike(book.id)}
@@ -258,12 +260,13 @@ function BuyNovelsBooks() {
 
 
                             <div className="mt-4 px-2 flex flex-col gap-1 pb-1">
-                                <p className="text-[#777777] text-xs">{book.category}</p>
                                 <h3 className="text-lg font-light antialiased">
                                     {book.title.length > 20 ? `${book.title.slice(0, 30)}...` : book.title}
                                 </h3>
                                 <p className="text-[#E74C3C] font-semibold antialiased">{book.price}</p>
-                                <p className="text-sm text-[#777777]">{book.location}</p>
+                               
+                                <p className="text-sm flex text-[#777777]"><FaLocationDot className='text-[#ff2424]' />
+                                {book.location}</p>
                             </div>
 
 
