@@ -1,38 +1,42 @@
-const express=require("express");
-const app=express();
-const database=require("./database");
-const cors = require("cors");
-const PORT = process.env.PORT || 4000;
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const { cloudinaryConnect } = require("./config/cloudinary");
-const dotenv = require("dotenv");
-dotenv.config();
+const express = require("express");
+const app = express();
+require("dotenv").config();
+// Database Connecting
+const mongoose = require("mongoose");
+const database=require('./config/database');
+database.connect();
+/*
+const mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost:27017/bookishDB", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 
-// database.connect();
-// Middlewares
-// app.use(express.json());
-// app.use(cookieParser());
-// app.use(
-//     cors({
-//         origin: "http://localhost:3000",
-//         methods: ["GET", "POST", "PUT", "DELETE"],
+}).then(() => {
+    console.log("Database Connected SuccessFully");
+}
 
-//         credentials: true,
-//     })
-// );
+).catch((error) => {
+    console.log("DB Connection Failed");
+    console.error(error);
+    process.exit(1);
 
-cloudinaryConnect();
-// app.get("/", (req, res) => {
-//     return res.json(
-//         {
-//             success: true,
-//             message: 'Your server is up and running....',
-//         });
-// });
+}) */
 
-app.listen(PORT, () => {
-    console.log(`App is running at ${PORT}`);
-    console.log("Server connected successfully and is ready to handle requests.");
 
-});
+
+app.use(express.json());
+app.listen(4000, () => {
+    console.log("Server Connected successfully: ")
+})
+
+app.get('/', (req, res) => {
+    res.send("Hello  Jii Kaise HO!")
+})
+
+app.post('/api/cars', (req, res) => {
+    const { name, price } = req.body;
+    console.log(name);
+    console.log(price);
+
+})
+console.log("MongoDB URL:", process.env.MONGODB_URL); // Check if it's defined
