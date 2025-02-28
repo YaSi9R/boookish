@@ -12,10 +12,28 @@ const userSchema = new mongoose.Schema(
             trim:true,
         },
         contactNumber:{
-            type:Number,
+            type:String,
             required:true,
             trim:true,
-        }
-    }
+        },
+        email:{
+            type:String,
+            required:true,
+
+        },
+        password: {
+			type: String,
+			required: true,
+		},
+        token: {
+			type: String,
+		},
+		resetPasswordExpires: {
+			type: Date,
+		},
+    },
+    { timestamps: true }
 
 )
+
+module.exports = mongoose.model("user", userSchema);
