@@ -190,37 +190,28 @@ function BuyNovelsBooks() {
 
 
     return (
-        <div className="container bg-[#f0f0f0] py-10 relative " style={{
+        <div className="container bg-[#f0f0f0] py-10 relative min-h-[650px]" style={{
             background: `rgba(240, 240, 240, 1)  center center / cover no-repeat`,
             minHeight: '650px', // Increase height here
         }}>
-            <div className="w-9/12 mx-auto py-6">
-                <h2 className="text-2xl antialiased text-left my-6 flex flex-col">
+            <div className="w-11/12 sm:w-10/12 md:w-9/12 mx-auto py-6">
+                <h2 className="text-2xl antialiased text-left my-6 ">
                     Buy Second Hand Novels
-                    <span className="w-[270px] h-[4px]  overflow-hidden bg-[#b62323] mt-2 rounded-sm"></span>
+                    <span className="block w-2/3 sm:w-[270px] h-[4px] bg-[#b62323] mt-2 rounded-sm"></span>
                 </h2>
 
-                <div className="flex justify-start gap-2 mb-[40px]">
-                    <button
-                        className="px-6 py-3 text-lg font-light transition duration-300"
-                        onClick={() => setSelectedCategory("fiction")}
-                        style={{
-                            backgroundColor: selectedCategory === "fiction" ? "#E74C3C" : "#f0f0f0",
-                            color: selectedCategory === "fiction" ? "white" : "black",
-                        }}
-                    >
-                        FICTION
-                    </button>
-                    <button
-                        className="px-6 py-3 text-lg font-light  transition duration-300 "
-                        onClick={() => setSelectedCategory("non-fiction")}
-                        style={{
-                            backgroundColor: selectedCategory === "non-fiction" ? "#E74C3C" : "#f0f0f0",
-                            color: selectedCategory === "non-fiction" ? "white" : "black",
-                        }}
-                    >
-                        NON-FICTION
-                    </button>
+                <div className="flex flex-wrap justify-start gap-2 mb-8">
+                    {['fiction', 'non-fiction'].map(category => (
+                        <button
+                            key={category}
+                            className={`px-6 py-3 text-lg font-light transition duration-300 ${
+                                selectedCategory === category ? 'bg-[#E74C3C] text-white' : 'bg-[#f0f0f0] text-black'
+                            }`}
+                            onClick={() => setSelectedCategory(category)}
+                        >
+                            {category.toUpperCase()}
+                        </button>
+                    ))}
                 </div>
 
 
@@ -228,7 +219,7 @@ function BuyNovelsBooks() {
                     {filteredBooks.map(book => (
                         <div
                             key={book.id}
-                            className="card flex flex-col justify-between shadow hover:shadow-md cursor-pointer"
+                            className=" justify-between shadow hover:shadow-md cursor-pointer"
                             style={{
                                 boxShadow: "rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
                             }}
@@ -290,3 +281,5 @@ function BuyNovelsBooks() {
 }
 
 export default BuyNovelsBooks
+
+
