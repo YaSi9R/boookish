@@ -50,10 +50,10 @@ const Home = () => {
         {/* Overlay Content */}
         <div className="absolute w-full md:w-[1100px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col md:flex-row items-center gap-4 md:gap-20 z-10 p-4  md:mt-0">
           {/* Main Text Section */}
-          <div className="text-black items-center justify-center  text-center md:text-left bg-transparent  p-2 rounded-lg max-w-lg ">
-            <h1 className="text-4xl font-bold mb-4">10000+ Used Books On <br /> Sale</h1>
-            <span className="block w-16 h-1 bg-black  mb-4"></span>
-            <p className="md:mb-6 md:text-m text-lg pb-[10px]">
+          <div className="text-black items-center justify-center  text-left bg-transparent  p-2 rounded-lg max-w-lg ">
+            <h1 className="text-4xl font-bold mb-4 ">10000+ Used Books On <br /> Sale</h1>
+            <span className="block w-16 h-1 bg-black  mb-4 "></span>
+            <p className="md:mb-6 md:text-m text-lg max-sm:py-[20px]    ">
               Buy and Sell Used Books in India. Search and buy second-hand books near you. Post a free ad to sell old books in your city. Download the app now.
             </p>
             <SellButton />
