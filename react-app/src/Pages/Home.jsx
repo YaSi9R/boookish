@@ -39,28 +39,28 @@ const Home = () => {
 
   return (
     <>
-      <div className="relative overflow-hidden h-screen">
+      <div className="relative md:overflow-hidden md:h-screen max-sm:h-[900px] max-sm:overflow-hidden ">
         {/* Background Image */}
         <img
           src={backgroundImage}
           alt="background"
-          className="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-110"
+          className="md:w-full md:h-full max-sm:ml-[130px] h-[2024px] object-cover transition-transform duration-500 ease-in-out hover:scale-110"
         />
 
         {/* Overlay Content */}
-        <div className="absolute w-[1100px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-row items-center gap-20 z-10 p-4">
+        <div className="absolute w-full md:w-[1100px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col md:flex-row items-center gap-4 md:gap-20 z-10 p-4  md:mt-0">
           {/* Main Text Section */}
-          <div className="text-black bg-transparent  p-2 rounded-lg max-w-lg ">
+          <div className="text-black items-center justify-center  text-center md:text-left bg-transparent  p-2 rounded-lg max-w-lg ">
             <h1 className="text-4xl font-bold mb-4">10000+ Used Books On <br /> Sale</h1>
             <span className="block w-16 h-1 bg-black  mb-4"></span>
-            <p className="mb-6 text-m ">
+            <p className="md:mb-6 md:text-m text-lg pb-[10px]">
               Buy and Sell Used Books in India. Search and buy second-hand books near you. Post a free ad to sell old books in your city. Download the app now.
             </p>
             <SellButton />
           </div>
 
           {/* Contact Form Section */}
-          <div className="text-black bg-white shadow-2xl p-8 rounded-lg w-[500px] max-w-lg">
+          <div className="text-black bg-white shadow-2xl p-4 md:p-8 rounded-lg w-full md:w-[500px] max-w-lg">
             <form action="/my-handling-form-page" method="post">
               <p className="mb-4">
                 <label htmlFor="name" className="block text-sm ">Title</label>
