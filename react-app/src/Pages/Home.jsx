@@ -116,10 +116,11 @@ const Home = () => {
       </div>
 
 
-      
+
       {/* Middle Background Section */}
+
       <div
-        className="parallex section-padding relative w-full h-[280px] flex items-center justify-center"
+        className="parallex section-padding relative w-full md:h-[280px] h-[500px] flex items-center justify-center"
         style={{
           background: `rgba(0, 0, 0, 0) url(${sectionImage}) center center no-repeat`,
           WebkitBackgroundSize: "cover",
@@ -132,19 +133,19 @@ const Home = () => {
         <div className="absolute inset-0 bg-black bg-opacity-70"></div>
 
         {/* Content */}
-        <div className="container mx-[150px] relative z-10 px-6 text-white text-center">
+        <div className="container mx-auto md:mx-[150px] px-6 relative z-10 text-white text-center">
           {/* Row Section */}
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4">
             {/* Left Section */}
-            <div className="flex items-center gap-6 text-center md:text-left">
-              <div className="text-8xl mt-4">
-              <PiHandHeartThin />
+            <div className="flex flex-col sm:flex-row items-center text-center sm:text-left">
+              <div className="text-6xl sm:text-8xl mt-2 sm:mt-4">
+                <PiHandHeartThin />
               </div>
-              <div className='mt-5 ml-4'>
-                <h4 className="italic text-4xl font-medium antialiased mb-4">
+              <div className="mt-4 sm:mt-5 sm:ml-4">
+                <h4 className="italic text-2xl sm:text-4xl font-medium antialiased mb-2 sm:mb-4">
                   Where to sell used second-hand books?
                 </h4>
-                <p className="text-base  font-light">
+                <p className="text-sm sm:text-base font-light">
                   Post an Ad now and one of you will be lucky to have your ad
                   featured. Featured Ads get more buyer interaction.
                 </p>
@@ -152,21 +153,18 @@ const Home = () => {
             </div>
 
             {/* Right Section */}
-            <div className="flex justify-center md:justify-end w-[200px] h-[60px]">
+            <div className="flex justify-center md:justify-end w-full h-auto md:w-[200px] min-h-[50px] sm:h-[60px]">
               <Link
                 to="./sellBooks"
-                className="btn bg-[#E74C3C] text-white px-4   inline-flex items-center hover:bg-[#b52417] transition text-lg"
+                className="btn bg-[#E74C3C] text-white px-4 py-2 sm:py-3 inline-flex items-center hover:bg-[#b52417] transition text-base sm:text-lg whitespace-nowrap"
               >
                 Post Free Ad <FaAngleDoubleRight className="ml-1" />
               </Link>
             </div>
-
-
-
-
           </div>
         </div>
       </div>
+
 
 
 
@@ -181,7 +179,7 @@ const Home = () => {
         <Buyoldbooks />
       </div>
 
-     
+
 
     </>
 

@@ -194,7 +194,7 @@ function BuyNovelsBooks() {
             background: `rgba(240, 240, 240, 1)  center center / cover no-repeat`,
             minHeight: '650px', // Increase height here
         }}>
-            <div className="w-11/12 sm:w-10/12 md:w-9/12 mx-auto py-6">
+            <div className="w-11/12 sm:w-10/12 md:w-10/12 md:w-9/12 mx-auto py-6">
                 <h2 className="text-2xl antialiased text-left my-6 ">
                     Buy Second Hand Novels
                     <span className="block w-2/3 sm:w-[270px] h-[4px] bg-[#b62323] mt-2 rounded-sm"></span>
