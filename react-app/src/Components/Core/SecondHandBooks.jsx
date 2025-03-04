@@ -117,7 +117,7 @@ return (
       <div className="relative ">
         {/* Left Button */}
         <button
-          className="absolute left-[-50px] top-1/2 transform -translate-y-1/2 bg-[#E74C3C] shadow-lg p-2 rounded-lg hover:bg-gray-200 z-10"
+          className="absolute left-[-50px] top-1/2 transform -translate-y-1/2 bg-[#E74C3C] shadow-lg p-2 ml-3 rounded-lg hover:bg-gray-200 z-10"
           onClick={() => handleScroll('left')}
         >
           {'<'}
@@ -126,13 +126,13 @@ return (
         {/* Scrollable Block */}
         <div
           ref={sliderRef}
-          className="flex gap-3 overflow-x-auto scrollbar-hide "
+          className="flex gap-3 overflow-x-auto scrollbar-hide snap-x snap-mandatory"
           style={{ scrollBehavior: 'smooth' }}
         >
           {extendedBooks.map((book, index) => (
             <div
               key={index}
-              className="card flex flex-col justify-between shadow hover:shadow-md cursor-pointer rounded-lg bg-white min-w-[250px]"
+              className="card flex flex-col justify-between shadow hover:shadow-md cursor-pointer w-full flex-shrink-0 snap-start rounded-lg bg-white md:w-[250px] "
               style={{
                 boxShadow:
                   'rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px',
@@ -142,7 +142,7 @@ return (
                 <img
                   src={book.imageUrl}
                   alt={`${book.title} cover`}
-                  className="w-full h-40 object-cover"
+                  className="w-full md:h-40 h-60 object-cover"
                 />
               </div>
               <div className="mt-1 px-2 flex flex-col gap-1 pb-1">
@@ -164,7 +164,7 @@ return (
 
         {/* Right Button */}
         <button
-          className="absolute right-[-50px] top-1/2 transform -translate-y-1/2 bg-[#E74C3C] shadow-lg p-2 rounded-lg hover:bg-gray-200 z-10"
+          className="absolute right-[-50px] top-1/2 transform -translate-y-1/2 bg-[#E74C3C] shadow-lg p-2 rounded-lg hover:bg-gray-200 z-10 mr-3"
           onClick={() => handleScroll('right')}
         >
           {'>'}

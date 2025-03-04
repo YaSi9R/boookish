@@ -111,6 +111,8 @@ function CategoryCards() {
       ))}
     </div>
        )}
+
+       
        {isMobile && (
         <div className="w-full h-[450px] flex overflow-hidden">
         <div
