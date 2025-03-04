@@ -118,7 +118,7 @@ return (
     minHeight: '650px', // Increase height here
   }}>
 
-    <div className="w-9/12 mx-auto py-6">
+    <div className="w-9/12  mx-auto py-6">
       <h2 className="text-2xl antialiased text-left my-6 flex flex-col">
         Buy Second Hand Books
         <span className="w-[260px] h-[4px] my-10 overflow-hidden bg-[#b62323] mt-2 rounded-sm"></span>
@@ -174,7 +174,7 @@ return (
 
         {/* Right Button */}
         <button
-          className="absolute right-[-50px] top-1/2 transform -translate-y-1/2 bg-[#E74C3C] shadow-lg p-2 rounded-lg hover:bg-gray-200 z-10 mr-3"
+          className="absolute right-[-50px] top-1/2 transform -translate-y-1/2 bg-[#E74C3C] shadow-lg p-2 ml-8 rounded-lg hover:bg-gray-200 z-10 mr-3"
           onClick={() => handleScroll('right')}
         >
           {'>'}
