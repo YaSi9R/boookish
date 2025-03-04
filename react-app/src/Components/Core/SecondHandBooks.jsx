@@ -98,9 +98,19 @@ const handleScroll = (direction) => {
 };
 
 useEffect(() => {
-  const autoScroll = setInterval(() => handleScroll('right'), 2000);
+  const slider = sliderRef.current;
+
+  const autoScroll = setInterval(() => {
+    if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 1) {
+      slider.scrollLeft = 0; 
+    } else {
+      handleScroll('right');
+    }
+  }, 3000);
+
   return () => clearInterval(autoScroll);
 }, []);
+
 
 return (
   <div className="container bg-[#f0f0f0] py-10 relative " style={{
