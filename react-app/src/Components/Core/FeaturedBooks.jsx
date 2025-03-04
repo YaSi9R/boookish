@@ -58,7 +58,7 @@ function FeaturedBooks() {
 
     return (
         <div className="container bg-[#f0f0f0] py-10">
-            <div className="w-9/12 mx-auto py-6">
+            <div className="w-10/12 md:w-9/12 mx-auto py-6">
                 {/* Heading */}
                 <h2 className="text-2xl antialiased text-left my-6 flex flex-col">
                     Featured Used Books
