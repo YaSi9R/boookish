@@ -120,17 +120,17 @@ const Buyoldbooks = () => {
         }
         >
 
-            <div className='w-9/12 mx-auto py-6'>
-                <h2 className="text-2xl antialiased text-left my-6 flex flex-col">
+            <div className='w-11/12 md:w-9/12 mx-auto py-6'>
+                <h2 className="text-2xl md:text-3xl font-bold text-left my-6">
                     Buy Old Books
-                    <span className="w-[170px] h-[4px] my-10 overflow-hidden bg-[#b62323] mt-2 rounded-sm"></span>
+                    <span className="w-[170px] h-[4px] my-10 bg-[#b62323] mt-2 rounded-sm block"></span>
                 </h2>
 
 
                 {ads.map((book) => (
-                <div className='w-full h-[250px] mt-10 outline outline-[1px] flex flex-row'>
+                <div className='w-full md:h-[250px] mt-10 outline outline-[1px] flex flex-col md:flex-row'>
 
-                    <div className='image border-solid '> <img src={book.image} alt="ads-image" className='h-full w-[400px]' /></div>
+                    <div className='image border-solid '> <img src={book.image} alt="ads-image" className='w-full md:w-[400px] h-[250px]' /></div>
                     <div className='pl-[40px] pr-[10px] mt-[20px] relative'>
                         <button className="absolute top-4 right-4 text-gray-400 hover:text-red-500 " onClick={() => handleLike(book.id)}>
                             {/* <FaHeart
