@@ -189,17 +189,17 @@ const Buyoldbooks = () => {
 
                     </div>
                     
-                    <div className="hidden md:block h-[190px] w-[1px] bg-black my-auto"></div>
+                    <div className="hidden md:block h-[190px] w-[1px] bg-black my-auto "></div>
 
-                    < div className="ml-10  w-[400px] mt-[40px]">
+                    < div className="mt-4 md:mt-[40px] ml-4 md:ml-10 w-full md:w-[400px] ">
                         <div className='flex flex-row'><p className="text-sm font-bold text-gray-500">Ad Type:</p> <p className='text-sm pl-1 text-[#777777]'> Sell</p>   </div>
                         <div className='flex flex-row'><p className="text-sm font-bold text-gray-500">Condition: </p>  <p className='text-sm pl-1 text-[#777777]'>New</p></div>
                         <div className='flex flex-row'><p className="text-sm font-bold text-gray-500">Visits: </p>  <p className='text-sm pl-1 text-[#777777]'>65</p></div>
                         <p className="text-xl font-bold text-[#FF0000] ">₹ 500</p>
                         <p className="text-sm font-bold text-gray-500 text-[#777777]">(Negotiable) </p>
 
-
-                        <button className="bg-[#FF0000] w-[200px] text-white px-4 py-2 mt-2 flex items-center font-bold justify-center rounded">
+                        {/*  md:w-[200px] text-white px-4 py-2 mt-2 */}
+                        <button className="bg-[#FF0000] w-[200px] text-white px-4 py-2 ml-[62px] md:ml-0 mt-4 mb-5 flex items-center font-bold justify-center rounded">
                             <FaRegEye />
 
                             VIEW AD
