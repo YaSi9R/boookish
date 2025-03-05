@@ -121,7 +121,7 @@ const Buyoldbooks = () => {
         >
 
             <div className='w-11/12 md:w-9/12 mx-auto py-6'>
-                <h2 className="text-2xl md:text-3xl font-bold text-left my-6">
+                <h2 className="text-2xl antialiased text-left my-6 flex flex-col">
                     Buy Old Books
                     <span className="w-[170px] h-[4px] my-10 bg-[#b62323] mt-2 rounded-sm block"></span>
                 </h2>
@@ -130,8 +130,8 @@ const Buyoldbooks = () => {
                 {ads.map((book) => (
                 <div className='w-full md:h-[250px] mt-10 outline outline-[1px] flex flex-col md:flex-row'>
 
-                    <div className='image border-solid '> <img src={book.image} alt="ads-image" className='w-full md:w-[400px] h-[250px]' /></div>
-                    <div className='pl-[40px] pr-[10px] mt-[20px] relative'>
+                    <div className='w-full md:w-[400px] h-[250px]'> <img src={book.image} alt="ads-image" className='h-full w-full object-cover ' /></div>
+                    <div className='md:pl-[40px] md:pr-[10px] md:mt-[20px] p-4  relative'>  
                         <button className="absolute top-4 right-4 text-gray-400 hover:text-red-500 " onClick={() => handleLike(book.id)}>
                             {/* <FaHeart
                                 className={`transition-colors duration-300
@@ -145,7 +145,7 @@ const Buyoldbooks = () => {
                             <FaHeart className={`text-3xl transition-colors duration-300 ${likedBooks.includes(book.id) ? "text-[#ff2424]" : "text-[#ccc]"}`} />
                         </button>
                         <div className=" justify-start text-[#777777] text-xs  pt-4 space-y-3">
-                            <div className='flex flex-row'>
+                            <div className='flex flex-wrap gap-4 '>
                                 <p>Competitive exam </p>
                                 <p className='ml-[15px]'>Engineering Exams</p>
                             </div>
@@ -189,7 +189,7 @@ const Buyoldbooks = () => {
 
                     </div>
                     
-                    <span className='h-[190px] w-[1px] my-10 overflow-hidden  bg-black m-auto rounded-sm'></span>
+                    <div className="hidden md:block h-[190px] w-[1px] bg-black my-auto"></div>
 
                     < div className="ml-10  w-[400px] mt-[40px]">
                         <div className='flex flex-row'><p className="text-sm font-bold text-gray-500">Ad Type:</p> <p className='text-sm pl-1 text-[#777777]'> Sell</p>   </div>
