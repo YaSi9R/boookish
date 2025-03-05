@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import image1 from '../../assets/Images/image.jpg';
 import { FaHeart } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
@@ -104,6 +104,24 @@ const Buyoldbooks = () => {
 
     ]
     const [likedBooks, setLikedBooks] = useState([]);
+    const [filteredAds, setFilteredAds] = useState([]);
+
+
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 768) {
+                setFilteredAds(ads.slice(0, 4)); // Show only first 4 ads on mobile
+            } else {
+                setFilteredAds(ads); // Show all ads on larger screens
+            }
+        };
+
+        handleResize(); // Run on initial load
+        window.addEventListener("resize", handleResize); // Listen for window resize
+
+        return () => window.removeEventListener("resize", handleResize); // Cleanup on unmount
+    }, []);
 
     const handleLike = (bookId) => {
         if (likedBooks.includes(bookId)) {
@@ -127,7 +145,7 @@ const Buyoldbooks = () => {
                 </h2>
 
 
-                {ads.map((book) => (
+                {filteredAds.map((book) => (
                 <div className='w-full md:h-[250px] mt-10 outline outline-[1px] flex flex-col md:flex-row'>
 
                     <div className='w-full md:w-[400px] h-[250px]'> <img src={book.image} alt="ads-image" className='h-full w-full object-cover ' /></div>
