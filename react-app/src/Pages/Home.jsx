@@ -44,7 +44,7 @@ const Home = () => {
         <img
           src={backgroundImage}
           alt="background"
-          className="md:w-full md:h-full max-sm:ml-[130px] h-[2024px] object-cover transition-transform duration-500 ease-in-out hover:scale-110"
+          className="md:w-full md:h-full max-sm:ml-[30px] h-[904px] object-cover transition-transform duration-500 ease-in-out hover:scale-110"
         />
 
         {/* Overlay Content */}
@@ -60,22 +60,28 @@ const Home = () => {
           </div>
 
           {/* Contact Form Section */}
-          <div className="text-black bg-white shadow-2xl p-4 md:p-8 rounded-lg w-full md:w-[500px] max-w-lg">
+          <div className="text-black bg-white shadow-2xl p-4 md:p-8 rounded-lg w-[90%] md:w-[500px] max-w-lg">
             <form action="/my-handling-form-page" method="post">
               <p className="mb-4">
-                <label htmlFor="name" className="block text-sm ">Title</label>
-                <input type="text" id="name" name="user_name" className="w-full p-2 border border-gray-300 text-sm" placeholder='What Are You Looking For...' />
+                <label htmlFor="name" className="block text-base md:text-sm">Title</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="user_name"
+                  className="w-full p-3 md:p-2 border border-gray-300 text-base md:text-sm"
+                  placeholder="What Are You Looking For..."
+                />
               </p>
               <p className="mb-4">
-                <label htmlFor="category" className="block text-sm mb-2 ">Select Category</label>
+                <label htmlFor="category" className="block text-base md:text-sm mb-2">Select Category</label>
                 <select
                   id="category"
                   name="category"
                   value={selectedCategory}
                   onChange={handleCategoryChange}
-                  className="w-full p-2 border border-gray-300 text-[#8e8e8e]"
+                  className="w-full p-3 md:p-2 border border-gray-300 text-[#8e8e8e] text-base md:text-sm"
                 >
-                  <option value="" disabled >Select category</option>
+                  <option value="" disabled>Select category</option>
                   {categories.map((category) => (
                     <option key={category.id} value={category.name}>
                       {category.name}
@@ -84,12 +90,24 @@ const Home = () => {
                 </select>
               </p>
               <p className="mb-4">
-                <label htmlFor="searchLocation" className="block text-sm">Location</label>
-                <input type="text" id="searchLocation" name="searchLocation" className="w-full p-2 border border-gray-300 text-sm" placeholder='Location...' />
+                <label htmlFor="searchLocation" className="block text-base md:text-sm">Location</label>
+                <input
+                  type="text"
+                  id="searchLocation"
+                  name="searchLocation"
+                  className="w-full p-3 md:p-2 border border-gray-300 text-base md:text-sm"
+                  placeholder="Location..."
+                />
               </p>
-              <button type="submit" className="mt-4 rounded  bg-[#E74C3C] text-sm text-white px-4 py-2 w-full hover:bg-[#b52417] ">SEARCH</button>
+              <button
+                type="submit"
+                className="mt-4 rounded bg-[#E74C3C] text-base md:text-sm text-white px-4 py-3 md:py-2 w-full hover:bg-[#b52417]"
+              >
+                SEARCH
+              </button>
             </form>
           </div>
+
         </div>
       </div>
 
