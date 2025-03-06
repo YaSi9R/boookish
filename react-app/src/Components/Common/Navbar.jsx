@@ -125,12 +125,12 @@ const Navbar = () => {
             </div>
 
             {open && (
-        <div className="absolute top-14 left-0 right-0 z-40 bg-white p-4 md:hidden">
-          <ul className="flex flex-col gap-y-4 text-black">
+        <div className="mobileDropdown absolute top-16 h-full left-0 right-0 z-40 bg-white p-4 md:hidden">
+          <ul className="flex flex-col gap-y-4 text-black ">
             {NavbarLinks.map((link, index) => (
               <li key={index}>
                 {link.submenu ? (
-                  <div className="flex flex-col">
+                  <div className="flex flex-col ">
                     <button
                       className="flex justify-between items-center w-full text-left"
                       onClick={() => setOpenDropdown(openDropdown === index ? null : index)}
@@ -168,19 +168,22 @@ const Navbar = () => {
             {/* Mobile Auth Buttons */}
             {!token && (
               <Link to="/login">
-                <button className="w-full rounded-[8px] border border-gray-700 bg-transparent px-[12px] py-[8px] text-gray-900 hover:bg-[#b52417] hover:text-white">
+                <button className="w-full rounded-[8px] border border-gray-700 bg-transparent px-[12px] py-[8px] text-gray-900 hover:bg-[#b52417] hover:text-white"
+                 onClick={() => setOpen(false)}>
                   Log in
                 </button>
               </Link>
             )}
             {!token && (
               <Link to="/signup">
-                <button className="w-full rounded-[8px] border border-gray-700 bg-transparent px-[12px] py-[8px] text-gray-900 hover:bg-[#b52417] hover:text-white">
+                <button className="w-full rounded-[8px] border border-gray-700 bg-transparent px-[12px] py-[8px] text-gray-900 hover:bg-[#b52417] hover:text-white"
+                 onClick={() => setOpen(false)}>
                   Register
                 </button>
               </Link>
             )}
-            <SellButton />
+
+            <SellButton onClick={() => setOpen(false)}/>
           </ul>
         </div>
       )}
