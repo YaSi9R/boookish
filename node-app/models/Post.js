@@ -68,16 +68,15 @@ const postSchema = new mongoose.Schema({
         required:true,
 
     },
-    Publisher:{
-        type:String,
+    old:{
+         type:String,
+         required:true,
     },
     MRP:{
         type:Number,
         required:true,
     },
-    PublishingYear:{
-        type:String,
-    },
+   
     Pages:{
         type:Number,
     },
