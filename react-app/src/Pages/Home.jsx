@@ -152,9 +152,7 @@ const Home = () => {
 
         {/* Content */}
         <div className="container mx-auto md:mx-[150px] px-6 relative z-10 text-white text-center">
-          {/* Row Section */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4">
-            {/* Left Section */}
             <div className="flex flex-col sm:flex-row items-center text-center sm:text-left">
               <div className="text-6xl sm:text-8xl mt-2 sm:mt-4">
                 <PiHandHeartThin />
@@ -170,7 +168,7 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Right Section */}
+            
             <div className="flex justify-center md:justify-end w-full h-auto md:w-[200px] min-h-[50px] sm:h-[60px]">
               <Link
                 to="./sellBooks"
