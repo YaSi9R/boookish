@@ -66,16 +66,21 @@ const Login = () => {
 
         {/* Right part of my login page */}
         <div className="h-[500px] w-[500px] flex flex-col justify-center">
-          <button className='text-left flex flex-row h-5 border'>
-            {/* icon */}
-            <FcGoogle className='' />
+          <button className="flex items-center justify-center gap-1 w-full py-2 border border-black  shadow-md text-black font-medium ">
 
-            Sign In with Google</button>
-          <span className='bg-[#777777] w-full h-[1px]'></span>
-          <p className='justify-center items-center text-center'>OR</p>
-          <span className='bg-[#777777] w-full h-[1px]'></span>
-          <form action="/login" className="space-y-4">
-            <label htmlFor="email" className="block text-lg font-medium">
+            <FcGoogle className="text-2xl" />
+            Sign in with Google
+          </button>
+
+
+          <div className="flex items-center gap-2 w-full my-4">
+            <span className="bg-[#777777] h-[1px] w-full"></span>
+            <p className="text-black text-sm font-light">OR</p>
+            <span className="bg-[#777777] h-[1px] w-full"></span>
+          </div>
+
+          <form action="/login" className="">
+            <label htmlFor="email" className="block mt-4 font-normal">
               Email
             </label>
             <input
@@ -83,10 +88,10 @@ const Login = () => {
               id="email"
               name="email"
               required
-              className="w-full p-2 border border-gray-300  focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full p-2 border border-gray-300  "
             />
 
-            <label htmlFor="password" className="block text-lg font-medium">
+            <label htmlFor="password" className="block mt-8  font-normal">
               Password
             </label>
             <input
@@ -96,10 +101,25 @@ const Login = () => {
               required
               className="w-full p-2 border border-gray-300  focus:outline-none focus:ring-2 focus:ring-red-500"
             />
+            <div className="flex items-center mt-4 justify-between w-full">
+              {/* Remember Me Checkbox */}
+              <label className="flex items-center gap-2 text-gray-600 cursor-pointer">
+                <input type="checkbox" className="w-4 h-4 accent-red-500" />
+                <span className="text-sm font-medium">Remember Me</span>
+              </label>
+
+              {/* Forgot Password Button */}
+              <button className="text-[#ff0000] font-medium text-sm hover:underline">
+                Forgot Password?
+              </button>
+            </div>
+
+
+
 
             <button
               type="submit"
-              className="w-full bg-[#E74C3C] text-white py-2 rounded-md hover:bg-red-600 transition"
+              className="w-full bg-[#E74C3C] text-white py-2 mt-10 hover:bg-red-600 transition"
             >
               Login
             </button>
