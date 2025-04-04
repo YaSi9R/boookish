@@ -15,3 +15,5 @@ exports.connect = () => {
         process.exit(1);
     } )
 };
+
+// Auth in javascript
