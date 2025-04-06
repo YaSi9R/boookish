@@ -127,7 +127,7 @@ const Signup = () => {
               <label className="flex items-center gap-2 text-gray-600 cursor-pointer">
                 <input type="checkbox" className="w-4 h-4 accent-red-500" />
                 <span className="text-sm font-medium">I agree to 
-                  <a href="" className='text-[#E74C3C]'>Terms & Conditions</a>
+                  <a href="conditions.pdf" className='text-[#E74C3C]'>Terms & Conditions</a>
                 </span>
               </label>
             </div>
