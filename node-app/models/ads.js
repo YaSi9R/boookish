@@ -2,7 +2,7 @@ import React from 'react'
 
 function ads() {
   return (
-    <div>ads</div>
+    <div><h1>helo</h1></div>
   )
 }
 
