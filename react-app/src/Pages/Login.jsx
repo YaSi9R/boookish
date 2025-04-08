@@ -4,9 +4,38 @@ import chatImg from "../assets/Images/chat.png";
 import globalImg from "../assets/Images/global.png";
 import locationImg from "../assets/Images/location.png";
 import { FcGoogle } from "react-icons/fc";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+
 
 const Login = () => {
+  const [formData, setFormData] = useState({
+    email: "", password: ""
+  });
+
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  function changeHandeler(event) {
+    setFormData((prev) => (
+      {
+        ...prev,
+        [event.target.name]: event.target.value
+      }
+    ))
+  }
+  function submitHandler(event) {
+    event.preventDefault();
+    console.log(formData);
+    toast.success("Log In Successfully");
+    setFormData({
+      email:"",
+      password:""
+    })
+  }
   return (
+    
     <>
       {/* Background Image Section */}
       <div
@@ -67,25 +96,38 @@ const Login = () => {
             <span className="bg-[#777777] h-[1px] w-full"></span>
           </div>
 
-          <form action="/login" className="">
+          <form onSubmit={submitHandler}>
             <label htmlFor="email" className="block mt-4 font-normal">Email</label>
             <input
               type="email"
               id="email"
               name="email"
+              value={formData.email}
               required
               className="w-full p-2 border border-gray-300"
+              placeholder="Enter Name"
+              onChange={changeHandeler}
             />
 
-            <label htmlFor="password" className="block mt-8 font-normal">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              required
-              className="w-full p-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500"
-            />
-
+            <label htmlFor="password" className="block mt-8 font-normal relative">
+              Password
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={changeHandeler}
+                required
+                className="w-full p-2 pr-10 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500"
+                placeholder="Password"
+              />
+              <span
+                className="absolute right-3 top-[48px] transform -translate-y-1/2 cursor-pointer text-gray-600"
+                onClick={()=>setShowPassword(prev=>!prev)}
+              >
+                {showPassword ? <FaRegEye />:<FaRegEyeSlash /> }
+              </span>
+            </label>
             <div className="flex items-center mt-4 justify-between w-full">
               <label className="flex items-center gap-2 text-gray-600 cursor-pointer">
                 <input type="checkbox" className="w-4 h-4 accent-red-500" />
