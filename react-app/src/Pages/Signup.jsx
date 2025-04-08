@@ -1,15 +1,57 @@
-import React from 'react'
+import React, { useState } from 'react'
 import bgImage from "../assets/Images/login.jpg";
 import logo from "../assets/logo/Screenshot 2025-04-05 184152.png"
 import mobile from "../assets/Images/mobile.png"
 import chat from "../assets/Images/chat.png"
 import globalImg from "../assets/Images/global.png"
 import user from "../assets/Images/userSupport.png"
+import toast from 'react-hot-toast';
 // import { FcGoogle } from "react-icons/fc";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+
 import GoogleSighnIn from "../Components/Common/GoogleSighnIn";
 
 
 const Signup = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    number: "",
+    email: "",
+    password: ""
+
+
+  });
+
+
+  const [isChecked, setChecked] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+
+
+  function changeHandler(event) {
+    setFormData((prev) => (
+      {
+        ...prev,
+        [event.target.name]: event.target.value
+
+      }
+    ))
+  }
+
+
+  function submitHandler(event) {
+    event.preventDefault();
+    toast.success("Register Successfully");
+    console.log(formData);
+    setFormData({
+      name: "",
+      number: "",
+      email: "",
+      password: ""
+
+    })
+
+  }
   return (
     <>
       <div className="parallex section-padding w-full h-[100px] flex items-center justify-center"
@@ -87,52 +129,72 @@ const Signup = () => {
             <span className="bg-[#777777] h-[1px] w-full"></span>
           </div>
 
-          <form action="/login" className="">
+          <form onSubmit={submitHandler}>
             <label htmlFor="name" className="block mt-4 font-normal">Name</label>
             <input
               type="name"
               id="name"
               name="name"
-              placeholer="Enter your name"
+              value={formData.name}
+              onChange={changeHandler}
               required
               className="w-full p-2 border border-gray-300"
+              placeholder='Name'
             />
 
-            <label htmlFor="contact" className="block mt-8 font-normal">Contact Number</label>
+            <label htmlFor="number" className="block mt-8 font-normal">Contact Number</label>
             <input
               type="number"
-              id="contact"
-              name="contact"
+              id="number"
+              name="number"
               required
+              onChange={changeHandler}
+              value={formData.number}
               className="w-full p-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500"
+              placeholder='Contact Number'
             />
             <label htmlFor="email" className="block mt-4 font-normal">Email</label>
             <input
               type="email"
               id="email"
               name="email"
+              value={formData.email}
               required
+              onChange={changeHandler}
               className="w-full p-2 border border-gray-300"
+              placeholder='Email'
             />
 
-<label htmlFor="password" className="block mt-8 font-normal">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              required
-              className="w-full p-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500"
-            />
+            <label htmlFor="password" className="block mt-8 font-normal relative">Password
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={changeHandler}
+                required
+                className="w-full p-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500"
+                placeholder='Password'
+
+              />
+              <span className="absolute right-3 top-[48px] transform -translate-y-1/2 cursor-pointer text-gray-600"
+               onClick={()=>{setShowPassword(prev=>!prev)}}>
+                {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+              </span>
+            </label>
             <div className="flex items-center mt-4 justify-between w-full">
               <label className="flex items-center gap-2 text-gray-600 cursor-pointer">
-                <input type="checkbox" className="w-4 h-4 accent-red-500" />
-                <span className="text-sm font-medium">I agree to 
+                <input type="checkbox" className="w-4 h-4 accent-red-500" checked={isChecked} onChange={() => setChecked(prev => !prev)} />
+                <span className="text-sm font-medium">I agree to
                   <a href="conditions.pdf" className='text-[#E74C3C]'>Terms & Conditions</a>
                 </span>
               </label>
             </div>
 
-            <button type="submit" className="w-full bg-[#E74C3C] text-white py-2 mt-10 hover:bg-red-600 transition">
+            <button type="submit" className={`w-full py-2 mt-10 transition duration-300 rounded 
+    ${isChecked
+                ? 'bg-[#E74C3C] text-white hover:bg-red-600 cursor-pointer'
+                : 'bg-[#daaaaa] text-black opacity-50 cursor-not-allowed'}`} disabled={!isChecked}>
               Login
             </button>
           </form>
