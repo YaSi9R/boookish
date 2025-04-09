@@ -97,11 +97,11 @@ const Navbar = () => {
           </ul>
         </nav>
         {/* Login / Signup / Dashboard */}
-        <div className="hidden md:flex items-center gap-x-4">
+        <div className="hidden md:flex items-center gap-x-4 ">
           {!token && (
             <Link to="/login">
               <button className="rounded-[8px] border border-richblack-700 bg-transparent px-[12px] py-[8px] text-richblack-900 hover:bg-[#b52417] duration-[75] hover:text-white">
-                Log in
+                LogIn
               </button>
             </Link>
           )}
