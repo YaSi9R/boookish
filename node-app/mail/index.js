@@ -1,2 +1,0 @@
-// temporary
-// Making nodemailer module
