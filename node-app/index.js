@@ -14,8 +14,7 @@ const bodyParser=require("body-parser");
 app.use(bodyParser.json());
 
 // import routes
-const poatData=require('./routes/index');
-app.use('/api/v1',poatData);
+
 
 
 
