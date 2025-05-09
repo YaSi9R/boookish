@@ -112,6 +112,7 @@ const Navbar = () => {
               </button>
             </Link>
           )}
+          {/* {token !== null && <ProfileDropdown />} */}
           <SellButton />
         </div>
 
