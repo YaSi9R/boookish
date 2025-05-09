@@ -1,8 +1,11 @@
 const express = require("express");
 const app = express();
-app.use(express.json());
-require("dotenv").config();
 
+require("dotenv").config();
+const userRoutes=require("./routes/userRoutes")
+const cookieParser = require("cookie-parser");
+app.use(express.json());
+app.use(cookieParser());
 // Database Connecting
 const mongoose = require("mongoose");
 const database=require('./config/database');
@@ -14,12 +17,14 @@ const bodyParser=require("body-parser");
 app.use(bodyParser.json());
 
 // import routes
+app.use("/api/v1/auth", userRoutes);
 
 
 
 
-app.listen(process.env.PORT, () => {
-    console.log("Server Connected successfully:  and is running at:4000 ")
+const PORT=process.env.PORT || 4000;
+app.listen(PORT, () => {
+    console.log(`Server Connected successfully:  and is running at:${PORT} `)
 })
 
 app.get('/', (req, res) => {
