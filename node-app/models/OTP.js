@@ -28,8 +28,9 @@ async function sendVerifcationEmail(email,otp) {
 
 
 OTPSchema.pre("save",async function(next) {
-    await sendVerifcationEmail(this.email,this.otp);
-    next();
+if (this.isNew) {
+		await sendVerificationEmail(this.email, this.otp);
+	}    next();
 });
 
 const OTP=mongoose.model("OTP",OTPSchema);

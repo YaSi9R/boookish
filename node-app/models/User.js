@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const mongoose = require("mongoose");
-
+const Post=require("./Post");
 const userSchema = new mongoose.Schema({
     Name: {
         type: String,
@@ -24,7 +24,11 @@ const userSchema = new mongoose.Schema({
     token: {
         type: String,
     },
+    account_type:{
+        type:String,
+        enum:["admin","user"],
 
+    },
     college: String,
     phone: String,
     location: String,
@@ -34,7 +38,7 @@ const userSchema = new mongoose.Schema({
     myAds: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Book",
+            ref: "myPost",
         }
     ],
 

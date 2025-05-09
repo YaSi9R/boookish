@@ -8,7 +8,7 @@ import OpenRoute from './Components/Core/Auth/OpenRoute';
 import Home from './Pages/Home';
 import FooterBackground from './Components/Common/FooterBackground';
 import { Link } from 'react-router-dom';
-
+import PrivateRoute from './Components/Core/Auth/PrivateRoute';
 
 
 
@@ -19,7 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
 
-
+{/* open routes for only the non loggedin users */}]
         <Route
           path="login"
           element={
@@ -38,6 +38,14 @@ function App() {
           }
         />
 
+{/* Private routes for only loggin in users */}
+<Route
+          element={
+            <PrivateRoute>
+              {/* <Dashboard /> */}
+            </PrivateRoute>
+          }
+        ></Route>
       </Routes>
       <FooterBackground/>
 
