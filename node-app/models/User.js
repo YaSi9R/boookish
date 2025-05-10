@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const Post=require("./Post");
+const Post = require("../models/Post");
+const Profile = require("../models/Profile");
 const userSchema = new mongoose.Schema({
     Name: {
         type: String,
@@ -23,21 +24,27 @@ const userSchema = new mongoose.Schema({
     token: {
         type: String,
     },
-    account_type:{
-        type:String,
-        enum:["Admin","Student"],
+    account_type: {
+        type: String,
+        enum: ["Admin", "Student"],
+        default: "Student",
 
     },
     college: String,
     phone: String,
     location: String,
     avatar: String,
+    // Additional details
+    additionalDetails: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: Profile,
+    },
 
     // / Books this user has listed for sale (My Ads)
     myAds: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "myPost",
+            ref: Post,
         }
     ],
 
@@ -45,7 +52,7 @@ const userSchema = new mongoose.Schema({
     favorites: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Book",
+            ref: Post,
         }
     ],
 
@@ -54,7 +61,7 @@ const userSchema = new mongoose.Schema({
         default: Date.now,
     },
 },
-{ timestamps: true });
+    { timestamps: true });
 
 module.exports = mongoose.model("User", userSchema);
 
