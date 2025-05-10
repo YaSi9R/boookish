@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
     },
     account_type:{
         type:String,
-        enum:["admin","user"],
+        enum:["Admin","Student"],
 
     },
     college: String,
@@ -60,4 +60,3 @@ module.exports = mongoose.model("User", userSchema);
 
 
 
-module.exports = mongoose.model("user", userSchema);

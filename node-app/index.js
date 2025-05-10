@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 
 require("dotenv").config();
-const userRoutes=require("./routes/userRoutes")
+const userRoutes=require("./routes/User")
 const cookieParser = require("cookie-parser");
 app.use(express.json());
 app.use(cookieParser());
