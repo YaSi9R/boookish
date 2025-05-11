@@ -7,6 +7,7 @@ import logo from "../../assets/logo/Bookish-logo1.png"
 import { CompetitiveDropdown, serviceDropdown, novelDropdown } from "../../data/navbar-links"
 import SellButton from '../Core/SellButton'
 import { FaChevronDown } from "react-icons/fa";
+import ProfileDropdown from '../Core/Auth/ProfileDropdown'
 
 
 
@@ -27,6 +28,7 @@ const Navbar = () => {
   const { token } = useSelector((state) => state.auth)
 
   const location = useLocation()
+  
 
 
 
@@ -39,7 +41,7 @@ const Navbar = () => {
   const toggleOpen = () => setOpen(!open);
 
   const [openDropdown, setOpenDropdown] = useState(null);
-
+console.log("Inside navbar",token);
 
   return (
     <div
@@ -98,21 +100,22 @@ const Navbar = () => {
         </nav>
         {/* Login / Signup / Dashboard */}
         <div className="hidden md:flex items-center gap-x-4 ">
-          {!token && (
+          
+          {token==null && (
             <Link to="/login">
               <button className="rounded-[8px] border border-richblack-700 bg-transparent px-[12px] py-[8px] text-richblack-900 hover:bg-[#b52417] duration-[75] hover:text-white">
                 LogIn
               </button>
             </Link>
           )}
-          {!token && (
+          {token==null && (
             <Link to="/signup">
               <button className="rounded-[8px] border border-richblack-700 bg-transparent px-[12px] py-[8px] text-richblack-900 hover:bg-[#b52417] duration-[75] hover:text-white">
                 Register
               </button>
             </Link>
           )}
-          {/* {token !== null && <ProfileDropdown />} */}
+          {token !==null &&  <ProfileDropdown /> }
           <SellButton />
         </div>
 

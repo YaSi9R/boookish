@@ -1,42 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import bgImage from "../assets/Images/login.jpg";
 import chatImg from "../assets/Images/chat.png";
 import globalImg from "../assets/Images/global.png";
 import locationImg from "../assets/Images/location.png";
+import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { useState } from "react";
-import toast from "react-hot-toast";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-
+import { login } from "../services/operations/authAPI";
+import { useDispatch } from "react-redux";
+import LoadingModal from "../Components/Common/LoadingModal"; // Import the LoadingModal
 
 const Login = () => {
-  
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    email: "", password: ""
+    email: "",
+    password: "",
   });
 
-
+  const { email, password } = formData;
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Loading state
 
   function changeHandeler(event) {
-    setFormData((prev) => (
-      {
-        ...prev,
-        [event.target.name]: event.target.value
-      }
-    ))
+    setFormData((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value,
+    }));
   }
-  function submitHandler(event) {
+
+  async function submitHandler(event) {
     event.preventDefault();
-    console.log(formData);
-    toast.success("Log In Successfully");
+    setIsLoading(true);
+    try {
+await dispatch(login(email, password, navigate));
     setFormData({
-      email:"",
-      password:""
-    })
+      email: "",
+      password: "",
+    });
+    } 
+    catch(error) {
+      console.error("lofin Failed",error);
+    }
+    finally {
+    setIsLoading(false); // Hide loading spinner after dispatch
   }
+}
+
   return (
-    
     <>
       {/* Background Image Section */}
       <div
@@ -57,28 +68,46 @@ const Login = () => {
           <div className="flex flex-col gap-6 pt-10">
             {/* Feature 1 */}
             <div className="flex gap-4 items-center">
-              <img src={chatImg} alt="Chat" className="w-[60px] h-[60px] md:w-[80px] md:h-[80px]" />
+              <img
+                src={chatImg}
+                alt="Chat"
+                className="w-[60px] h-[60px] md:w-[80px] md:h-[80px]"
+              />
               <div>
                 <h2 className="text-lg md:text-xl text-black font-light">Chat & Messaging</h2>
-                <p className="text-[#777777] text-sm md:text-base">Experience new inbuilt features. Access your chats and account info from any device.</p>
+                <p className="text-[#777777] text-sm md:text-base">
+                  Experience new inbuilt features. Access your chats and account info from any device.
+                </p>
               </div>
             </div>
 
             {/* Feature 2 */}
             <div className="flex gap-4 items-center">
-              <img src={globalImg} alt="Dashboard" className="w-[60px] h-[60px] md:w-[80px] md:h-[80px]" />
+              <img
+                src={globalImg}
+                alt="Dashboard"
+                className="w-[60px] h-[60px] md:w-[80px] md:h-[80px]"
+              />
               <div>
                 <h2 className="text-lg md:text-xl text-black font-light">User Dashboard</h2>
-                <p className="text-[#777777] text-sm md:text-base">Dedicated profile section for user. Report or wishlist any Ad.</p>
+                <p className="text-[#777777] text-sm md:text-base">
+                  Dedicated profile section for user. Report or wishlist any Ad.
+                </p>
               </div>
             </div>
 
             {/* Feature 3 */}
             <div className="flex gap-4 items-center">
-              <img src={locationImg} alt="Global" className="w-[60px] h-[60px] md:w-[80px] md:h-[80px]" />
+              <img
+                src={locationImg}
+                alt="Global"
+                className="w-[60px] h-[60px] md:w-[80px] md:h-[80px]"
+              />
               <div>
                 <h3 className="text-lg md:text-xl text-black font-light">All Over The World</h3>
-                <p className="text-[#777777] text-sm md:text-base">Each and every city covered via Google. So wherever you are, just start Book flowing.</p>
+                <p className="text-[#777777] text-sm md:text-base">
+                  Each and every city covered via Google. So wherever you are, just start Book flowing.
+                </p>
               </div>
             </div>
           </div>
@@ -124,9 +153,9 @@ const Login = () => {
               />
               <span
                 className="absolute right-3 top-[48px] transform -translate-y-1/2 cursor-pointer text-gray-600"
-                onClick={()=>setShowPassword(prev=>!prev)}
+                onClick={() => setShowPassword((prev) => !prev)}
               >
-                {showPassword ? <FaRegEye />:<FaRegEyeSlash /> }
+                {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
               </span>
             </label>
             <div className="flex items-center mt-4 justify-between w-full">
@@ -143,6 +172,9 @@ const Login = () => {
           </form>
         </div>
       </div>
+
+      {/* Loading Spinner (Modal with Opaque Background) */}
+      {isLoading && <LoadingModal color="#E74C3C" size={40} />} {/* Adjust size as needed */}
     </>
   );
 };
