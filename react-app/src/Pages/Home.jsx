@@ -14,7 +14,6 @@ import BuyNovelsBooks from '../Components/Core/BuyNovels';
 
 
 
-
 // import { FaHandHoldingHeart } from "react-icons/fa";
 import { FaAngleDoubleRight } from "react-icons/fa";
 import { PiHandHeartThin } from "react-icons/pi";
@@ -193,6 +192,7 @@ const Home = () => {
 
       <div>
         <Buyoldbooks />
+        
       </div>
 
 

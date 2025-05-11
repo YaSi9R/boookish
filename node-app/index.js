@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-
+const cors=require("cors");
 require("dotenv").config();
 const userRoutes=require("./routes/User")
 const cookieParser = require("cookie-parser");
@@ -10,6 +10,17 @@ app.use(cookieParser());
 const mongoose = require("mongoose");
 const database=require('./config/database');
 database.connect();
+
+
+
+app.use(
+    cors({
+        origin:"http://localhost:3000",
+        method:["GET","POST","PUT","DELETE"],
+        credentials:true,
+    })
+);
+
 
 // Agar mujhe parsing sambhaalni hai to me body-parser ka use karunga
 // specifially use karte hain ham post and updtae ke case me
