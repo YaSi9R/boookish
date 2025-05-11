@@ -102,17 +102,17 @@ export function login(email, password, navigate) {
             toast.success("Login Successful")
 
             dispatch(setToken(response.data.token))
-            const userImage = response.data?.user?.image
-                ? response.data.user.image
+            const userImage = response.data?.user?.avatar
+                ? response.data.user.avatar
                 : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.Name} }`
             const userData = response.data.user || {}
             console.log("Dispatching setUser with:", userData)
             dispatch(setUser({
-        ...userData,
-        image: userImage, // Ensure image is passed in case it's not in the response
-      }))
+                ...userData,
+                image: userImage, // Ensure image is passed in case it's not in the response
+            }))
 
-            localStorage.setItem("user", JSON.stringify(userData))
+            localStorage.setItem("user", JSON.stringify({ ...userData, image: userImage }))
 
             console.log("Dispatched setUser with:", { ...response.data.user, image: userImage })
             localStorage.setItem("token", JSON.stringify(response.data.token))

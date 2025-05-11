@@ -8,7 +8,7 @@ import useOnClickOutside from "../../../hooks/useOnClickOutside"
 import { logout } from "../../../services/operations/authAPI"
 
 export default function ProfileDropdown() {
-  const  user  = useSelector((state) => state.profile)
+  const  user  = useSelector((state) => state.profile.user)
   console.log("ye hai user inside profileDropdown",user);
   if(!user) {
     console.log("error in taking user from auth")
@@ -26,9 +26,9 @@ export default function ProfileDropdown() {
 
   return (
     <button className="relative" onClick={() => setOpen(true)}>
-      <div className="flex items-center gap-x-1">
+      <div className="flex items-center gap-x-1 ">
         <img
-          src={user?.avatar}
+          src={user?.image}
           alt={`profile-${user?.firstName}`}
           className="aspect-square w-[30px] rounded-full object-cover"
         />
@@ -37,11 +37,11 @@ export default function ProfileDropdown() {
       {open && (
         <div
           onClick={(e) => e.stopPropagation()}
-          className="absolute top-[118%] right-0 z-[1000] divide-y-[1px] divide-richblack-700 overflow-hidden rounded-md border-[1px] border-richblack-700 bg-richblack-800"
+          className="absolute top-[128%] right-0 z-[1000] divide-y-[1px] divide-richblack-700 overflow-hidden rounded-md border-[1px] border-richblack-700 bg-white"
           ref={ref}
         >
           <Link to="/dashboard/my-profile" onClick={() => setOpen(false)}>
-            <div className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-100 hover:bg-richblack-700 hover:text-richblack-25">
+            <div className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-black hover:bg-[#E74C3C] hover:text-white">
               <VscDashboard className="text-lg" />
               Dashboard
             </div>
@@ -51,7 +51,7 @@ export default function ProfileDropdown() {
               dispatch(logout(navigate))
               setOpen(false)
             }}
-            className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-100 hover:bg-richblack-700 hover:text-richblack-25"
+            className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-black hover:bg-[#E74C3C] hover:text-white"
           >
             <VscSignOut className="text-lg" />
             Logout
