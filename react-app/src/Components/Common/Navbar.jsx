@@ -8,6 +8,7 @@ import { CompetitiveDropdown, serviceDropdown, novelDropdown } from "../../data/
 import SellButton from '../Core/SellButton'
 import { FaChevronDown } from "react-icons/fa";
 import ProfileDropdown from '../Core/Auth/ProfileDropdown'
+import { PiChatsCircleBold } from "react-icons/pi";
 
 
 
@@ -28,7 +29,7 @@ const Navbar = () => {
   const { token } = useSelector((state) => state.auth)
 
   const location = useLocation()
-  
+
 
 
 
@@ -41,7 +42,7 @@ const Navbar = () => {
   const toggleOpen = () => setOpen(!open);
 
   const [openDropdown, setOpenDropdown] = useState(null);
-console.log("Inside navbar",token);
+  console.log("Inside navbar", token);
 
   return (
     <div
@@ -100,32 +101,58 @@ console.log("Inside navbar",token);
         </nav>
         {/* Login / Signup / Dashboard */}
         <div className="hidden md:flex items-center gap-x-4 ">
-          
-          {token==null && (
+
+          {token == null && (
             <Link to="/login">
               <button className="rounded-[8px] border border-richblack-700 bg-transparent px-[12px] py-[8px] text-richblack-900 hover:bg-[#b52417] duration-[75] hover:text-white">
                 LogIn
               </button>
             </Link>
           )}
-          {token==null && (
+          {token == null && (
             <Link to="/signup">
               <button className="rounded-[8px] border border-richblack-700 bg-transparent px-[12px] py-[8px] text-richblack-900 hover:bg-[#b52417] duration-[75] hover:text-white">
                 Register
               </button>
             </Link>
           )}
-          {token !==null &&  <ProfileDropdown /> }
+
+          {token !== null && (
+            <Link to="/chats">
+              <button className='flex items-center gap-x-1 aspect-square w-[30px] rounded-full object-cover'>
+                <PiChatsCircleBold
+                  className='text-[30px] text-[#E74C3C]'
+                />
+
+              </button>
+            </Link>
+          )}
+          {token !== null &&
+            <ProfileDropdown />}
           <SellButton />
         </div>
 
         {/* Mobile dropdown */}
+        <div className='md:hidden flex gap-1 items-center justify-center'>
+          {token !== null && (
+            <Link to="/chats">
+              <button className='flex items-center gap-x-1 aspect-square w-[30px] rounded-full object-cover align-middle text-center  justify-center'>
+                <PiChatsCircleBold
+                  className='text-[30px] text-[#E74C3C]'
+                />
+
+              </button>
+            </Link>
+          )}
+
+       
         <button
           className="md:hidden w-12 h-12 bg-black flex items-center justify-center m-2"
           onClick={() => setOpen(!open)}
         >
           {open ? <AiOutlineClose fontSize={30} fill="#fafafc" /> : <AiOutlineMenu fontSize={24} fill="#fafafc" />}
         </button>
+         </div>
 
 
 
@@ -134,7 +161,20 @@ console.log("Inside navbar",token);
 
       {open && (
         <div className="mobileDropdown absolute top-16 h-full left-0 right-0 z-40 bg-white p-4 md:hidden">
-          <ul className="flex flex-col gap-y-4 text-black ">
+          <ul className="flex flex-col gap-y-3 text-black ">
+            {token && (
+              <li>
+                <Link
+                  to="/dashboard/my-profile"
+                  onClick={() => setOpen(false)}
+                  className={`block  rounded hover:bg-gray-100 transition duration-200 ${matchRoute("/my-profile") ? "text-[#E74C3C]" : "text-black"
+                    }`}
+                >
+                  My Profile
+                </Link>
+              </li>
+            )}
+
             {NavbarLinks.map((link, index) => (
               <li key={index}>
                 {link.submenu ? (
@@ -152,7 +192,7 @@ console.log("Inside navbar",token);
                           <Link
                             key={subIndex}
                             to={sublink.path}
-                            className="py-2 text-gray-700 hover:text-[#b52417]"
+                            className="text-gray-700 hover:text-[#b52417]"
                             onClick={() => setOpen(false)}
                           >
                             {sublink.name}
@@ -164,7 +204,7 @@ console.log("Inside navbar",token);
                 ) : (
                   <Link
                     to={link.path}
-                    className={`block py-2 ${matchRoute(link?.path) ? "text-[#E74C3C]" : "text-black"}`}
+                    className={`block  ${matchRoute(link?.path) ? "text-[#E74C3C]" : "text-black"}`}
                     onClick={() => setOpen(false)}
                   >
                     {link.title}
@@ -193,7 +233,9 @@ console.log("Inside navbar",token);
 
             <SellButton onClick={() => setOpen(false)} />
           </ul>
+
         </div>
+
       )}
     </div>
   )

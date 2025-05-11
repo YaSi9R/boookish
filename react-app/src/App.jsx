@@ -9,10 +9,27 @@ import Home from './Pages/Home';
 import FooterBackground from './Components/Common/FooterBackground';
 import { Link } from 'react-router-dom';
 import PrivateRoute from './Components/Core/Auth/PrivateRoute';
-
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setToken } from "./slices/authSlice";       // adjust path as needed
+import { setUser } from "./slices/profileSlice"; 
 
 
 function App() {
+   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
+
+    if (token) {
+      dispatch(setToken(JSON.parse(token)));
+    }
+
+    if (user) {
+      dispatch(setUser(JSON.parse(user)));
+    }
+  }, []);
   
   return (
     <div className="flex min-h-screen w-screen flex-col bg-white font-inter">

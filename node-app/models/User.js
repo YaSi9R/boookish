@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema({
         default: "Student",
 
     },
+    image: {
+        type: String,
+        required: true,
+    },
     college: String,
     phone: String,
     location: String,
