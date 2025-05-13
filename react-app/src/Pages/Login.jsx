@@ -8,7 +8,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { login } from "../services/operations/authAPI";
 import { useDispatch } from "react-redux";
-import LoadingModal from "../Components/Common/LoadingModal"; // Import the LoadingModal
+import LoadingModal from "../Components/Common/LoadingModal"; 
 
 const Login = () => {
   const dispatch = useDispatch();
