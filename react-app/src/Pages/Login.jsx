@@ -9,7 +9,6 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { login } from "../services/operations/authAPI";
 import { useDispatch } from "react-redux";
 import LoadingModal from "../Components/Common/LoadingModal"; 
-
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ const Login = () => {
 
   const { email, password } = formData;
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [isLoading, setIsLoading] = useState(false);
 
   function changeHandeler(event) {
     setFormData((prev) => ({
