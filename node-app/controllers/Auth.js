@@ -19,7 +19,7 @@ exports.signup = async (req, res) => {
       otp,
     } = req.body;
 
-    if (!Name || !contactNumber || !email || !password || !otp) {
+    if (!Name || !contactNumber || !email || !password ) {
       return res.status(400).json({
         success: false,
         message: "All fields are required",

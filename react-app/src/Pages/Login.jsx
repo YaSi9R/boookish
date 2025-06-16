@@ -175,7 +175,8 @@ await dispatch(login(email, password, navigate));
       </div>
 
       {/* Loading Spinner (Modal with Opaque Background) */}
-      {isLoading && <LoadingModal color="#E74C3C" size={40} />} {/* Adjust size as needed */}
+      {isLoading && <LoadingModal color="#E74C3C" size={40} />} 
+      {/* Adjust size as needed */}
     </>
   );
 };

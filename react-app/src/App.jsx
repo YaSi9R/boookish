@@ -13,7 +13,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setToken } from "./slices/authSlice";       // adjust path as needed
 import { setUser } from "./slices/profileSlice"; 
-
+import VerifyEmail from './Pages/VerifyEmail';
 
 function App() {
    const dispatch = useDispatch();
@@ -54,6 +54,14 @@ function App() {
               <Signup />
             </OpenRoute>
           }
+        />
+        <Route
+        path="verify-email"
+        element={
+          <OpenRoute>
+            <VerifyEmail/>
+          </OpenRoute>
+        }
         />
 
 {/* Private routes for only loggin in users */}
