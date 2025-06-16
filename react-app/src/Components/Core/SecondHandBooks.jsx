@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, {  useRef, useEffect } from 'react';
 import image1 from '../../assets/Images/image.jpg';
 
 function SecondHandBooks() {

@@ -42,19 +42,10 @@ export function sendOtp(email, navigate) {
     }
 }
 
-export function signUp(
-
-    Name,
-    contactNumber,
-    email,
-    password,
-    accountType,
-    otp,
-    navigate
-) {
+export function signUp(Name, contactNumber, email, password, accountType, otp) {
     return async (dispatch) => {
-        const toastId = toast.loading("Loading...")
-        dispatch(setLoading(true))
+        // dispatch(setLoading(true));
+
         try {
             const response = await apiConnector("POST", SIGNUP_API, {
                 Name,
@@ -63,25 +54,37 @@ export function signUp(
                 password,
                 accountType,
                 otp,
-                otp,
-            })
+            });
 
-            console.log("SIGNUP API RESPONSE............", response)
+            console.log("Payload to SIGNUP API:", {
+                Name,
+                contactNumber,
+                email,
+                password,
+                accountType,
+                otp,
+            });
+
+
+            console.log("SIGNUP API RESPONSE............", response);
 
             if (!response.data.success) {
-                throw new Error(response.data.message)
+                throw new Error(response.data.message);
             }
-            toast.success("Signup Successful from frontend")
-            navigate("/login")
+
+            toast.success("Signup Successful from frontend");
+            return true; // ✅ Let the caller navigate
         } catch (error) {
-            console.log("SIGNUP API ERROR............", error)
-            toast.error("Signup Failed")
-            navigate("/signup")
+            console.log("SIGNUP API ERROR............", error.response?.data || error);
+            toast.error("Signup Failed");
+            return false;
+        } finally {
+            dispatch(setLoading(false));
+           
         }
-        dispatch(setLoading(false))
-        toast.dismiss(toastId)
-    }
+    };
 }
+
 
 export function login(email, password, navigate) {
     return async (dispatch) => {
