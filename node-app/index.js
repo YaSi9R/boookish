@@ -15,7 +15,8 @@ database.connect();
 
 app.use(
     cors({
-        origin:"http://localhost:3000",
+        // origin:"http://localhost:3000",
+        origin:"https://bookish-psi.vercel.app/",
         method:["GET","POST","PUT","DELETE"],
         credentials:true,
     })
