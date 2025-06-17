@@ -10,7 +10,7 @@ import mobile from "../assets/Images/mobile.png"
 import chat from "../assets/Images/chat.png"
 import globalImg from "../assets/Images/global.png"
 import user from "../assets/Images/userSupport.png"
-import LoadingModal from "../Components/Common/LoadingModal"; 
+import LoadingModal from "../Components/Common/LoadingModal";
 
 import GoogleSighnIn from "../Components/Common/GoogleSighnIn"
 import { setLoading, setSignupData } from '../slices/authSlice'
@@ -39,44 +39,47 @@ const Signup = () => {
   }
 
   const submitHandler = async (e) => {
-  e.preventDefault();
-  setIsLoading(true);
-  try {
-    const { Name, contactNumber, email, password } = formData;
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      const { Name, contactNumber, email, password } = formData;
 
-    if (!Name || !contactNumber || !email || !password) {
-      toast.error("All fields are required");
-      return;
+      if (!Name || !contactNumber || !email || !password) {
+        toast.error("All fields are required");
+        return;
+      }
+
+      if (!isChecked) {
+        toast.error("You must agree to Terms & Conditions");
+        return;
+      }
+
+      const signupData = {
+        ...formData,
+        accountType: "Student"
+      };
+
+      dispatch(setSignupData(signupData));
+      const result = await dispatch(sendOtp(email, navigate));
+      if (result) {
+        toast.success("OTP sent to your email");
+      }
+
+
+      setFormData({
+        Name: "",
+        contactNumber: "",
+        email: "",
+        password: ""
+      });
+      setChecked(false);
+    } catch (error) {
+      console.error("Signup failed:", error);
+      toast.error("Something went wrong during signup");
+    } finally {
+      setIsLoading(false);
     }
-
-    if (!isChecked) {
-      toast.error("You must agree to Terms & Conditions");
-      return;
-    }
-
-    const signupData = {
-      ...formData,
-      accountType: "Student"
-    };
-
-    dispatch(setSignupData(signupData));
-    await dispatch(sendOtp(email, navigate));
-    toast.success("OTP sent to your email");
-
-    setFormData({
-      Name: "",
-      contactNumber: "",
-      email: "",
-      password: ""
-    });
-    setChecked(false);
-  } catch (error) {
-    console.error("Signup failed:", error);
-    toast.error("Something went wrong during signup");
-  } finally {
-    setIsLoading(false);
-  }
-};
+  };
 
 
   return (
@@ -214,8 +217,8 @@ const Signup = () => {
           </form>
         </div>
       </div>
-            {isLoading && <LoadingModal color="#E74C3C" size={40} />} 
-      
+      {isLoading && <LoadingModal color="#E74C3C" size={40} />}
+
     </>
   )
 }

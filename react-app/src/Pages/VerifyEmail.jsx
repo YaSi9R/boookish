@@ -118,7 +118,7 @@ function VerifyEmail() {
                 className="flex items-center text-blue-100 gap-x-2"
                 onClick={() =>
                   signupData?.email
-                    ? dispatch(sendOtp(signupData.email))
+                    ? dispatch(sendOtp(signupData.email,navigate))
                     : toast.error("Email not found")
                 }
               >
