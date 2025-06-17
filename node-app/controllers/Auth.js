@@ -9,6 +9,8 @@ require("dotenv").config();
 // Signup Controller for Registering USers
 
 exports.signup = async (req, res) => {
+	console.log("Signup Request Body:", req.body);
+
   try {
     const {
       Name,
@@ -41,6 +43,9 @@ exports.signup = async (req, res) => {
         message: "Invalid or expired OTP",
       });
     }
+	console.log("Fetched OTP:", response);
+console.log("Provided OTP:", otp);
+
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -59,7 +64,7 @@ exports.signup = async (req, res) => {
       email,
       password: hashedPassword,
       account_type: accountType || "Student",
-      avatar: `https://api.dicebear.com/5.x/initials/svg?seed=${Name}`,
+      image: `https://api.dicebear.com/5.x/initials/svg?seed=${Name}`,
       additionalDetails: profileDetails._id,
     });
 
