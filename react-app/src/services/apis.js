@@ -1,4 +1,18 @@
-const BASE_URL = process.env.REACT_APP_BASE_URL
+import axios from "axios"
+
+export const axiosInstance = axios.create({})
+
+export const apiConnector = (method, url, bodyData, headers, params) => {
+  return axiosInstance({
+    method: `${method}`,
+    url: `${url}`,
+    data: bodyData ? bodyData : null,
+    headers: headers ? headers : null,
+    params: params ? params : null,
+  })
+}
+
+const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:4000/api/v1"
 
 // AUTH ENDPOINTS
 export const endpoints = {
@@ -12,42 +26,25 @@ export const endpoints = {
 // PROFILE ENDPOINTS
 export const profileEndpoints = {
   GET_USER_DETAILS_API: BASE_URL + "/profile/getUserDetails",
-  GET_USER_ENROLLED_COURSES_API: BASE_URL + "/profile/getEnrolledCourses",
-  GET_INSTRUCTOR_DATA_API: BASE_URL + "/profile/instructorDashboard",
-}
-
-// STUDENTS ENDPOINTS
-export const studentEndpoints = {
-  COURSE_PAYMENT_API: BASE_URL + "/payment/capturePayment",
-  COURSE_VERIFY_API: BASE_URL + "/payment/verifyPayment",
-  SEND_PAYMENT_SUCCESS_EMAIL_API: BASE_URL + "/payment/sendPaymentSuccessEmail",
-}
-
-
-
-// RATINGS AND REVIEWS
-export const ratingsEndpoints = {
-  REVIEWS_DETAILS_API: BASE_URL + "/course/getReviews",
-}
-
-// CATAGORIES API
-export const categories = {
-  CATEGORIES_API: BASE_URL + "/course/showAllCategories",
-}
-
-// CATALOG PAGE DATA
-export const catalogData = {
-  CATALOGPAGEDATA_API: BASE_URL + "/course/getCategoryPageDetails",
-}
-// CONTACT-US API
-export const contactusEndpoint = {
-  CONTACT_US_API: BASE_URL + "/reach/contact",
-}
-
-// SETTINGS PAGE API
-export const settingsEndpoints = {
   UPDATE_DISPLAY_PICTURE_API: BASE_URL + "/profile/updateDisplayPicture",
   UPDATE_PROFILE_API: BASE_URL + "/profile/updateProfile",
-  CHANGE_PASSWORD_API: BASE_URL + "/auth/changepassword",
   DELETE_PROFILE_API: BASE_URL + "/profile/deleteProfile",
+}
+
+// POSTS ENDPOINTS (NEW)
+export const postEndpoints = {
+  GET_ALL_POSTS_API: BASE_URL + "/posts",
+  GET_POST_BY_ID_API: BASE_URL + "/posts",
+  CREATE_POST_API: BASE_URL + "/posts/create",
+  GET_MY_POSTS_API: BASE_URL + "/posts/user/my-posts",
+  UPDATE_POST_API: BASE_URL + "/posts",
+  DELETE_POST_API: BASE_URL + "/posts",
+}
+
+// FAVORITES ENDPOINTS (NEW)
+export const favoritesEndpoints = {
+  ADD_TO_FAVORITES_API: BASE_URL + "/favorites/add",
+  REMOVE_FROM_FAVORITES_API: BASE_URL + "/favorites/remove",
+  GET_FAVORITES_API: BASE_URL + "/favorites",
+  CHECK_FAVORITE_API: BASE_URL + "/favorites/check",
 }
