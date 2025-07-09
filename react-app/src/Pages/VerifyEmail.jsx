@@ -7,8 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { sendOtp, signUp } from "../services/operations/authAPI";
 import toast from "react-hot-toast";
 import bgImage from "../assets/Images/login.jpg";
-
+import LoadingModal from "../Components/Common/LoadingModal";
 function VerifyEmail() {
+  const[isLoading,setIsLoading]=useState(false);
   const [otp, setOtp] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ function VerifyEmail() {
 
   const handleVerifyAndSignup = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     if (!signupData) {
       toast.error("Signup data missing");
       return;
@@ -52,6 +53,7 @@ function VerifyEmail() {
       toast.success("Signup successful!");
       navigate("/login");
     } else {
+      setIsLoading(false)
       toast.error("Signup failed");
     }
   };
@@ -129,6 +131,8 @@ function VerifyEmail() {
           </div>
         )}
       </div>
+            {isLoading && <LoadingModal color="#E74C3C" size={40} />}
+
     </>
   );
 }

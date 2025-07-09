@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { toast } from "react-hot-toast"
 
 import { setLoading, setToken } from "../../slices/authSlice"
@@ -5,6 +6,7 @@ import { setLoading, setToken } from "../../slices/authSlice"
 import { setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiConnector"
 import { endpoints } from "../apis"
+
 
 const {
     SENDOTP_API,
@@ -78,7 +80,7 @@ export function signUp(Name, contactNumber, email, password, accountType, otp) {
                 throw new Error(response.data.message);
             }
 
-            toast.success("Signup Successful from frontend");
+            // toast.success("Signup Successful from frontend");
             return true; // ✅ Let the caller navigate
         } catch (error) {
             console.log("SIGNUP API ERROR............", error.response?.data || error);
