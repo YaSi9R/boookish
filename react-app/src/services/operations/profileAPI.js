@@ -71,7 +71,7 @@ export function updateProfile(token, formData,navigate) {
         : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.updatedUserDetails.Name}`
       dispatch(setUser({ ...response.data.updatedUserDetails, image: userImage }))
       toast.success("Profile Updated Successfully")
-      navigate("/dasboard/my-profile");
+      navigate("/dashboard/my-profile");
     } catch (error) {
       console.log("UPDATE_PROFILE_API API ERROR............", error)
       toast.error("Could Not Update Profile")
