@@ -15,6 +15,7 @@ export default function SellBook() {
     handleSubmit,
     setValue,
     watch,
+    reset,
     formState: { errors },
   } = useForm()
 
@@ -53,17 +54,18 @@ export default function SellBook() {
   // Handle image selection
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files)
-    if (files.length > 5) {
-      toast.error("You can upload maximum 5 images")
+
+    if (files.length + selectedImages.length > 5) {
+      toast.error("You can upload a maximum of 5 images")
       return
     }
 
-    setSelectedImages(files)
-    setValue("images", files)
+    setSelectedImages((prev) => [...prev, ...files])
+    setValue("images", [...selectedImages, ...files])
 
     // Create preview URLs
     const previews = files.map((file) => URL.createObjectURL(file))
-    setPreviewImages(previews)
+    setPreviewImages((prev) => [...prev, ...previews])
   }
 
   // Remove image
@@ -120,7 +122,10 @@ export default function SellBook() {
 
       if (result) {
         toast.success("Book posted successfully!")
-        navigate("/dashboard/my-posts")
+        reset()
+        setSelectedImages([])
+        setPreviewImages([])
+        navigate("/")
       }
     } catch (error) {
       console.error("Error creating post:", error)
@@ -283,9 +288,7 @@ export default function SellBook() {
                 >
                   <option value="">Select Condition</option>
                   <option value="New">New</option>
-                  <option value="Like New">Like New</option>
-                  <option value="Good">Good</option>
-                  <option value="Fair">Fair</option>
+                  
                   <option value="Used">Used</option>
                 </select>
                 {errors.Condition && <p className="text-red-500 text-sm mt-1">{errors.Condition.message}</p>}

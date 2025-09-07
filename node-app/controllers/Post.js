@@ -21,83 +21,67 @@ exports.createPost = async (req, res) => {
       Name,
       Number,
       City,
-    } = req.body
+    } = req.body;
 
-    const userId = req.user.id
+    // Ensure user is logged in
+    const sellerId = req.user?.id;
+    if (!sellerId) {
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
 
     // Validate required fields
-    if (
-      !Title ||
-      !Category ||
-      !subCategory ||
-      !adType ||
-      !PriceType ||
-      !Price ||
-      !Condition ||
-      !Description ||
-      !Name ||
-      !Number ||
-      !City
-    ) {
-      return res.status(400).json({
-        success: false,
-        message: "All required fields must be filled",
-      })
+    if (!Title || !Category || !subCategory || !adType || !Price || !Condition || !Description) {
+      return res.status(400).json({ success: false, message: "Please fill all required fields" });
     }
 
-    // Handle image uploads
-    const imageUrls = []
-    if (req.files && req.files.images) {
-      const images = Array.isArray(req.files.images) ? req.files.images : [req.files.images]
-
-      for (const image of images) {
-        const uploadedImage = await uploadImageToCloudinary(image, process.env.FOLDER_NAME || "Bookish")
-        imageUrls.push(uploadedImage.secure_url)
-      }
+    // Handle images (max 5)
+    if (!req.files || !req.files.images) {
+      return res.status(400).json({ success: false, message: "At least one image is required" });
     }
 
-    // Create new post
+    let imagesArray = [];
+    const images = Array.isArray(req.files.images) ? req.files.images : [req.files.images];
+
+    if (images.length > 5) {
+      return res.status(400).json({ success: false, message: "You can upload maximum 5 images" });
+    }
+
+    for (const img of images) {
+      const uploaded = await uploadImageToCloudinary(img, process.env.FOLDER_NAME);
+      imagesArray.push(uploaded.secure_url);
+    }
+
+    // Save post
     const newPost = await Post.create({
       Title,
       Category,
       subCategory,
       adType,
       PriceType,
-      Price: Number(Price),
+      Price,
       Condition,
-      Images: imageUrls,
       old,
-      MRP: Number(MRP),
-      Pages: Pages ? Number(Pages) : undefined,
+      MRP,
+      Pages,
       Language,
       Description,
       Name,
-      Number: Number(Number),
+      Number,
       City,
-      seller: userId,
-    })
+      Images: imagesArray, // ✅ match schema field name
+      seller: sellerId,
+    });
 
-    // Add post to user's myAds
-    await User.findByIdAndUpdate(userId, { $push: { myAds: newPost._id } }, { new: true })
-
-    // Populate seller info
-    const populatedPost = await Post.findById(newPost._id).populate("seller", "Name email contactNumber")
-
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
       message: "Post created successfully",
-      data: populatedPost,
-    })
+      data: newPost,
+    });
   } catch (error) {
-    console.error("Create Post Error:", error)
-    res.status(500).json({
-      success: false,
-      message: "Failed to create post",
-      error: error.message,
-    })
+    console.error("CREATE POST ERROR:", error);
+    return res.status(500).json({ success: false, message: "Failed to create post", error: error.message });
   }
-}
-
+};
 // Get all posts with optional filters
 exports.getAllPosts = async (req, res) => {
   try {

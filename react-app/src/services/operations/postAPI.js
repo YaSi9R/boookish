@@ -75,28 +75,37 @@ export async function getPostDetails(postId, token) {
 }
 
 // Create new post
+// Create new post
 export async function createPost(postData, token) {
-  const toastId = toast.loading("Creating post...")
+  const toastId = toast.loading("Creating post...");
   try {
+    // ✅ Enforce max 5 images before sending
+    if (postData.getAll("images").length > 5) {
+      toast.error("You can upload a maximum of 5 images");
+      toast.dismiss(toastId);
+      return null;
+    }
+
     const response = await apiConnector("POST", CREATE_POST_API, postData, {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${token}`,
-    })
+    });
 
-    if (!response.data.success) {
-      throw new Error(response.data.message)
+    if (!response?.data?.success) {
+      throw new Error(response?.data?.message || "Failed to create post");
     }
 
-    toast.success("Post created successfully!")
-    return response.data.data
+    toast.success("Book posted successfully!");
+    return response.data.data;
   } catch (error) {
-    console.log("CREATE POST API ERROR............", error)
-    toast.error("Failed to create post")
-    return null
+    console.error("Create Post API Error: in operations/postApi.js/createPost", error);
+    toast.error(error.response?.data?.message || "Error while creating post");
+    return null;
   } finally {
-    toast.dismiss(toastId)
+    toast.dismiss(toastId);
   }
 }
+
 
 // Get user's posts
 export async function getMyPosts(token) {
