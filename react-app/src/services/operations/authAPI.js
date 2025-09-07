@@ -65,7 +65,7 @@ export function signUp(payload, navigate) {
       navigate("/login");
     } catch (error) {
       console.log("SIGNUP API ERROR............", error);
-      toast.error("Signup Failed");
+      toast.error("Signup Failed authapi.js");
       navigate("/signup");
     }
     dispatch(setLoading(false));
