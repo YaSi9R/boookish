@@ -19,7 +19,7 @@ import VerifyEmail from "./Pages/VerifyEmail"
 import Dashboard from "./Pages/Dashboard"
 import Profile from "./Pages/Profile"
 import Settings from "./Pages/Dashboard/Settings"
-import MyPosts from "./Pages/Dashboard/MyPosts"
+// import MyPosts from "./Pages/Dashboard/MyPosts"
 import SellBooks from "./Pages/SellBooks"
 import EditPost from "./Pages/Dashboard/EditPost"
 import Favorites from "./Pages/Dashboard/Favorites"
@@ -86,7 +86,7 @@ function App() {
         >
           <Route path="/dashboard/my-profile" element={<Profile />} />
           <Route path="/dashboard/settings" element={<Settings />} />
-          <Route path="/dashboard/my-posts" element={<MyPosts />} />
+          {/* <Route path="/dashboard/my-posts" element={<MyPosts />} /> */}
           <Route path="/dashboard/add-post" element={<SellBooks />} />
           <Route path="/dashboard/edit-post/:postId" element={<EditPost />} />
           <Route path="/dashboard/favorites" element={<Favorites />} />

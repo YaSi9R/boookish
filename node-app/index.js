@@ -39,6 +39,7 @@ app.use(
 // Routes
 app.use("/api/v1/auth", userRoutes)
 app.use("/api/v1/posts", postRoutes)
+
 app.use("/api/v1/profile", profileRoutes)
 app.use("/api/v1/favorites", favoritesRoutes)
 
@@ -64,6 +65,8 @@ app.use("*", (req, res) => {
     message: "Route not found",
   })
 })
+
+
 
 const PORT = process.env.PORT || 4000
 app.listen(PORT, () => {

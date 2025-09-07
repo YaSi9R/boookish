@@ -55,11 +55,12 @@ const postSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  Condition: {
-    type: String,
-    required: true,
-    enum: ["Sell", "Used"],
-  },
+ Condition: {
+  type: String,
+  required: true,
+  enum: ["New", "Used"],  
+},
+
   Images: {
     type: [String],
     required: true,

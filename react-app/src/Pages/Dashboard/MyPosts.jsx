@@ -6,9 +6,9 @@ import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { getMyPosts } from "../../services/operations/postAPI"
 import IconBtn from "../../Components/Common/IconBtn"
-import PostsTable from "../../Components/DashBoard/MyPosts/PostsTable"
+// import PostsTable from "../../Components/DashBoard/MyPosts/PostsTable"
 
-export default function MyPosts() {
+export  function MyPosts() {
   const { token } = useSelector((state) => state.auth)
   const navigate = useNavigate()
   const [posts, setPosts] = useState([])
@@ -42,7 +42,7 @@ export default function MyPosts() {
           <VscAdd />
         </IconBtn>
       </div>
-      {posts && <PostsTable posts={posts} setPosts={setPosts} />}
+      {/* {posts && <PostsTable posts={posts} setPosts={setPosts} />} */}
     </>
   )
 }
