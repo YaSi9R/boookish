@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import bgImage from "../assets/Images/login.jpg";
 import LoadingModal from "../Components/Common/LoadingModal";
 function VerifyEmail() {
-  const[isLoading,setIsLoading]=useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [otp, setOtp] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,45 +18,41 @@ function VerifyEmail() {
   const handleVerifyAndSignup = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+
     if (!signupData) {
       toast.error("Signup data missing");
       return;
     }
 
-    const {
-      Name,
-      contactNumber,
-      email,
-      password,
-      accountType,
-    } = signupData;
+    const { Name, contactNumber, email, password, accountType } = signupData;
 
-    console.log("SIGNUP payload →", {
+    const payload = {
       Name,
       contactNumber,
       email,
       password,
       accountType,
-      otp,
-    });
+      otp,  // include OTP
+    };
+
+    console.log("Final SIGNUP payload →", payload);
 
     if (!Name || !contactNumber || !email || !password || !otp) {
       toast.error("Missing required fields.");
       return;
     }
 
-    const success = await dispatch(
-      signUp(Name, contactNumber, email, password, accountType, otp, navigate)
-    );
+    const success = await dispatch(signUp(payload, navigate));
 
     if (success) {
       toast.success("Signup successful!");
       navigate("/login");
     } else {
-      setIsLoading(false)
+      setIsLoading(false);
       toast.error("Signup failed");
     }
   };
+
 
   return (
     <>
@@ -82,24 +78,24 @@ function VerifyEmail() {
             </p>
 
             <form onSubmit={handleVerifyAndSignup}>
-                      <div className="flex justify-center gap-2 sm:gap-4 flex-wrap sm:flex-nowrap">
+              <div className="flex justify-center gap-2 sm:gap-4 flex-wrap sm:flex-nowrap">
 
-              <OtpInput
-                value={otp}
-                onChange={setOtp}
-                numInputs={6}
-                renderInput={(props) => (
-                  <input
-                    {...props}
-                    placeholder="-"
-                    style={{
-                      boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
-                    }}
-                className="w-[44px] sm:w-[48px] lg:w-[60px] bg-richblack-100 rounded-[0.5rem] text-black font-bold text-center aspect-square focus:border-0 focus:outline-2 focus:outline-[#E74C3C]"
-                  />
-                )}
-                containerStyle={{ justifyContent: "space-between", gap: "0 6px" }}
-              />
+                <OtpInput
+                  value={otp}
+                  onChange={setOtp}
+                  numInputs={6}
+                  renderInput={(props) => (
+                    <input
+                      {...props}
+                      placeholder="-"
+                      style={{
+                        boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                      }}
+                      className="w-[44px] sm:w-[48px] lg:w-[60px] bg-richblack-100 rounded-[0.5rem] text-black font-bold text-center aspect-square focus:border-0 focus:outline-2 focus:outline-[#E74C3C]"
+                    />
+                  )}
+                  containerStyle={{ justifyContent: "space-between", gap: "0 6px" }}
+                />
               </div>
               <button
                 type="submit"
@@ -120,7 +116,7 @@ function VerifyEmail() {
                 className="flex items-center text-blue-100 gap-x-2"
                 onClick={() =>
                   signupData?.email
-                    ? dispatch(sendOtp(signupData.email,navigate))
+                    ? dispatch(sendOtp(signupData.email, navigate))
                     : toast.error("Email not found")
                 }
               >
@@ -131,7 +127,7 @@ function VerifyEmail() {
           </div>
         )}
       </div>
-            {isLoading && <LoadingModal color="#E74C3C" size={40} />}
+      {isLoading && <LoadingModal color="#E74C3C" size={40} />}
 
     </>
   );
