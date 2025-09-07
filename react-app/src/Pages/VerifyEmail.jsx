@@ -49,7 +49,7 @@ function VerifyEmail() {
       navigate("/login");
     } else {
       setIsLoading(false);
-      toast.error("Signup failed verifyemail:");
+      // toast.error("Signup failed verifyemail:");
     }
   };
 
