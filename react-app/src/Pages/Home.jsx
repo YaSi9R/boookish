@@ -169,7 +169,7 @@ const Home = () => {
             
             <div className="flex justify-center md:justify-end w-full h-auto md:w-[200px] min-h-[50px] sm:h-[60px]">
               <Link
-                to="./sellBooks"
+                to="./sellBook"
                 className="btn bg-[#E74C3C] text-white px-4 py-2 sm:py-3 inline-flex items-center hover:bg-[#b52417] transition text-base sm:text-lg whitespace-nowrap"
               >
                 Post Free Ad <FaAngleDoubleRight className="ml-1" />
