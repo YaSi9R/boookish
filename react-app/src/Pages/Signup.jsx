@@ -74,7 +74,7 @@ const Signup = () => {
       });
       setChecked(false);
     } catch (error) {
-      console.error("Signup failed:", error);
+      console.error("Signup failed sighnup.jsx:", error);
       toast.error("Something went wrong during signup");
     } finally {
       setIsLoading(false);
