@@ -63,7 +63,7 @@ console.log("Provided OTP:", otp);
       contactNumber,
       email,
       password: hashedPassword,
-      account_type: accountType || "Student",
+      accountType: accountType || "Student",
       image: `https://api.dicebear.com/5.x/initials/svg?seed=${Name}`,
       additionalDetails: profileDetails._id,
     });
