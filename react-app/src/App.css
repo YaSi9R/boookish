@@ -262,3 +262,170 @@ details > summary::-webkit-details-marker {
     font-weight: 400;
   }
 }
+
+
+
+/* AI se yaha se hai  */
+
+/* Custom styles for the book marketplace */
+.form-style {
+  @apply w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5;
+}
+
+.lable-style {
+  @apply text-[0.875rem] text-richblack-5;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #e74c3c;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Rich black color palette */
+.text-richblack-5 {
+  color: #f1f2ff;
+}
+.text-richblack-25 {
+  color: #dbddea;
+}
+.text-richblack-50 {
+  color: #c5c7d4;
+}
+.text-richblack-100 {
+  color: #afb2bf;
+}
+.text-richblack-200 {
+  color: #999daa;
+}
+.text-richblack-300 {
+  color: #838894;
+}
+.text-richblack-400 {
+  color: #6e727f;
+}
+.text-richblack-500 {
+  color: #585d69;
+}
+.text-richblack-600 {
+  color: #424854;
+}
+.text-richblack-700 {
+  color: #2c333f;
+}
+.text-richblack-800 {
+  color: #161d29;
+}
+.text-richblack-900 {
+  color: #000814;
+}
+
+.bg-richblack-5 {
+  background-color: #f1f2ff;
+}
+.bg-richblack-25 {
+  background-color: #dbddea;
+}
+.bg-richblack-50 {
+  background-color: #c5c7d4;
+}
+.bg-richblack-100 {
+  background-color: #afb2bf;
+}
+.bg-richblack-200 {
+  background-color: #999daa;
+}
+.bg-richblack-300 {
+  background-color: #838894;
+}
+.bg-richblack-400 {
+  background-color: #6e727f;
+}
+.bg-richblack-500 {
+  background-color: #585d69;
+}
+.bg-richblack-600 {
+  background-color: #424854;
+}
+.bg-richblack-700 {
+  background-color: #2c333f;
+}
+.bg-richblack-800 {
+  background-color: #161d29;
+}
+.bg-richblack-900 {
+  background-color: #000814;
+}
+
+.border-richblack-700 {
+  border-color: #2c333f;
+}
+.border-richblack-800 {
+  border-color: #161d29;
+}
+
+/* Yellow accent colors */
+.text-yellow-50 {
+  color: #ffd60a;
+}
+.text-yellow-100 {
+  color: #ffd60a;
+}
+.bg-yellow-50 {
+  background-color: #ffd60a;
+}
+.bg-yellow-800 {
+  background-color: #b8860b;
+}
+
+/* Pink accent colors */
+.text-pink-200 {
+  color: #f472b6;
+}
+.text-pink-25 {
+  color: #fdf2f8;
+}
+.text-pink-100 {
+  color: #fce7f3;
+}
+.text-pink-300 {
+  color: #f9a8d4;
+}
+.bg-pink-700 {
+  background-color: #be185d;
+}
+.bg-pink-900 {
+  background-color: #831843;
+}
+.border-pink-700 {
+  border-color: #be185d;
+}
+
+/* Green accent colors */
+.text-caribbeangreen-300 {
+  color: #7dd3fc;
+}
+
+/* Pure greys */
+.bg-pure-greys-800 {
+  background-color: #424854;
+}
