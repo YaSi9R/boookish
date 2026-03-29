@@ -62,7 +62,7 @@ exports.createPost = async (req, res) => {
       Condition,
       old,
       MRP,
-      Pages,
+      Pages: Pages === "" ? undefined : Pages,
       Language,
       Description,
       Name,
@@ -70,6 +70,11 @@ exports.createPost = async (req, res) => {
       City,
       Images: imagesArray, // ✅ match schema field name
       seller: sellerId,
+    });
+
+    // Add post to User's myAds array
+    await User.findByIdAndUpdate(sellerId, {
+      $push: { myAds: newPost._id },
     });
 
     return res.status(201).json({
