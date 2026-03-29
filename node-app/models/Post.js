@@ -26,13 +26,13 @@ const postSchema = new mongoose.Schema({
     validate: {
       validator: function(value) {
         const categoryToSubCategories = {
-          "Competitive Exam": ["UPSC", "SSC", "Banking", "Railway"],
-          "Engineering": ["Computer Science", "Mechanical", "Electrical", "Civil"],
-          "Magazines": ["Science", "Fashion", "Tech", "Entertainment"],
-          "Management Books": ["Finance", "Marketing", "HR", "Leadership"],
-          "Medical": ["Anatomy", "Pharmacology", "Surgery", "Pathology"],
-          "School Books": ["Mathematics", "Science", "History", "Geography"],
-          "Stories": ["Fiction", "Non-Fiction", "Comics", "Short Stories"]
+          "Competitive Exam": ["UPSC", "SSC", "Banking", "Railway", "GATE", "CAT", "Other"],
+          "Engineering": ["Computer Science", "Mechanical", "Electrical", "Civil", "Electronics", "Other"],
+          "Magazines": ["Science", "Fashion", "Tech", "Entertainment", "News", "Other"],
+          "Management Books": ["Finance", "Marketing", "HR", "Leadership", "Strategy", "Other"],
+          "Medical": ["Anatomy", "Pharmacology", "Surgery", "Pathology", "Nursing", "Other"],
+          "School Books": ["Mathematics", "Science", "History", "Geography", "English", "Other"],
+          "Stories": ["Fiction", "Non-Fiction", "Comics", "Short Stories", "Novels", "Other"]
         };
 
         return categoryToSubCategories[this.Category]?.includes(value);

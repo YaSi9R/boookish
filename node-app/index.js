@@ -29,8 +29,7 @@ cloudinaryConnect()
 // CORS Configuration
 app.use(
   cors({
-    // origin: "http://localhost:3000",
-    origin: "https://bookish-psi.vercel.app",
+    origin: ["http://localhost:3000", "https://bookish-psi.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   }),
