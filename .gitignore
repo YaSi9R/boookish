@@ -1,0 +1,24 @@
+# dependencies
+node_modules/
+
+# env files (IMPORTANT)
+.env
+*.env
+
+# specific paths
+react-app/node_modules/
+node-app/node_modules/
+react-app/.env
+node-app/.env
+
+# logs
+logs
+*.log
+
+# build folders
+build/
+dist/
+
+# OS files
+.DS_Store
+Thumbs.db
