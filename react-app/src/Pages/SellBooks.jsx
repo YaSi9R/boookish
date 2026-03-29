@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { useForm } from "react-hook-form"
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-hot-toast"
 import { HiOutlineCurrencyRupee } from "react-icons/hi"
