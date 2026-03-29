@@ -21,7 +21,6 @@ export default function SellBook() {
 
   const { token } = useSelector((state) => state.auth)
   const { user } = useSelector((state) => state.profile)
-  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const [loading, setLoading] = useState(false)

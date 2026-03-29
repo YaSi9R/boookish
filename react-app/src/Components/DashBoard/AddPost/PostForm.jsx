@@ -20,7 +20,6 @@ export default function PostForm() {
     formState: { errors },
   } = useForm()
 
-  const dispatch = useDispatch()
   const navigate = useNavigate()
   const { token } = useSelector((state) => state.auth)
   const { post, editPost: editPostFlag } = useSelector((state) => state.post)

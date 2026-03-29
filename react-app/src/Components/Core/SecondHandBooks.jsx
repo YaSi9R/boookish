@@ -1,80 +1,20 @@
-import React, {  useRef, useEffect } from 'react';
-import image1 from '../../assets/Images/image.jpg';
+import React, { useRef, useEffect, useState } from 'react';
+import { useDispatch } from "react-redux";
+import { getAllPosts } from "../../services/operations/postAPI";
 
 function SecondHandBooks() {
-  const books = [
-    {
-        id: 1,
-        title: "Mathematics Class XI",
-        category: "Computer/Information Technology",
-        price: "Price On Call",
-        location: "Kolkata, West Bengal",
-        datePosted: "December 17, 2024",
-        views: 17,
-        imageUrl: image1,
-    },
-    {
-        id: 2,
-        title: "It Ends With Us (Collection)",
-        category: "Fiction Stories",
-        price: "₹2,000 (Negotiable)",
-        location: "Faridabad, Haryana, India",
-        datePosted: "December 17, 2024",
-        views: 22,
-        imageUrl: image1,
-    },
-    {
-        id: 3,
-        title: "Objective NCERT at Your Fingertips",
-        category: "Medical Competitive Exam",
-        price: "₹700 (Fixed)",
-        location: "Gobichettipalayam, Erode",
-        datePosted: "December 16, 2024",
-        views: 12,
-        imageUrl: image1,
-    },
-    {
-        id: 4,
-        title: "Wave and Thermodynamics",
-        category: "Others Engineering",
-        price: "Price On Call",
-        location: "Lucknow",
-        datePosted: "December 16, 2024",
-        views: 17,
-        imageUrl: image1,
-    },
-    {
-        id: 5,
-        title: "Programming With JAVA",
-        category: "Computer/Information Technology",
-        price: "Price On Call",
-        location: "Kolkata, West Bengal",
-        datePosted: "December 17, 2024",
-        views: 17,
-        imageUrl: image1,
-    },
-    {
-        id: 6,
-        title: "The Haunted Hill House",
-        category: "Fiction Stories",
-        price: "₹2,000 (Negotiable)",
-        location: "Faridabad, Haryana, India",
-        datePosted: "December 17, 2024",
-        views: 22,
-        imageUrl: image1,
-    },
-    {
-        id: 7,
-        title: "Biology NEET Questions On Your FingerTips",
-        category: "Medical Competitive Exam",
-        price: "₹700 (Fixed)",
-        location: "Gobichettipalayam, Erode",
-        datePosted: "December 16, 2024",
-        views: 12,
-        imageUrl: image1,
-    },
+  const [books, setBooks] = useState([]);
+  const dispatch = useDispatch();
 
-];
+  useEffect(() => {
+    const fetchSecondHand = async () => {
+      const result = await dispatch(getAllPosts({ condition: "Used", limit: 8 }));
+      if (result && result.length > 0) {
+        setBooks(result);
+      }
+    };
+    fetchSecondHand();
+  }, [dispatch]);
 
 const sliderRef = useRef(null);
 
@@ -150,22 +90,22 @@ return (
             >
               <div className="relative overflow-hidden">
                 <img
-                  src={book.imageUrl}
-                  alt={`${book.title} cover`}
+                  src={book.Images?.[0] || "/placeholder.svg"}
+                  alt={`${book.Title} cover`}
                   className="w-full md:h-40 h-60 object-cover"
                 />
               </div>
               <div className="mt-1 px-2 flex flex-col gap-1 pb-1">
-                <p className="text-[#777777] text-xs">{book.category}</p>
+                <p className="text-[#777777] text-xs">{book.Category}</p>
                 <h3 className="text-lg font-light antialiased">
-                  {book.title.length > 20
-                    ? `${book.title.slice(0, 30)}...`
-                    : book.title } 
+                  {book.Title?.length > 20
+                    ? `${book.Title.slice(0, 30)}...`
+                    : book.Title } 
                 </h3>
               </div>
               <div className="px-2 py-2 mt-4">
                 <p className="text-[#E74C3C] font-semibold antialiased">
-                  {book.price}
+                  ₹{book.Price}
                 </p>
               </div>
             </div>

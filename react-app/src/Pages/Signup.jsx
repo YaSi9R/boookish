@@ -13,7 +13,7 @@ import user from "../assets/Images/userSupport.png"
 import LoadingModal from "../Components/Common/LoadingModal";
 
 import GoogleSighnIn from "../Components/Common/GoogleSighnIn"
-import { setLoading, setSignupData } from '../slices/authSlice'
+import { setSignupData } from '../slices/authSlice'
 import { sendOtp } from '../services/operations/authAPI'
 
 const Signup = () => {

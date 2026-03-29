@@ -24,7 +24,7 @@ export default function Upload({
     previewFiles(files)
   }
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  const { getRootProps, getInputProps } = useDropzone({
     accept: !video ? { "image/*": [".jpeg", ".jpg", ".png", ".gif"] } : { "video/*": [".mp4"] },
     onDrop,
   })
