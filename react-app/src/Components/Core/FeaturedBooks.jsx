@@ -1,50 +1,21 @@
-import React, { useState } from "react";
-import image1 from "../../assets/Images/image.jpg";
+import React, { useState, useEffect } from "react";
 import { FaHeart } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { getAllPosts } from "../../services/operations/postAPI";
 
 function FeaturedBooks() {
-    const books = [
-        {
-            id: 1,
-            title: "Mathematics Class XI",
-            category: "Computer/Information Technology",
-            price: "Price On Call",
-            location: "Kolkata, West Bengal",
-            datePosted: "December 17, 2024",
-            views: 17,
-            imageUrl: image1,
-        },
-        {
-            id: 2,
-            title: "It Ends With Us (Collection)",
-            category: "Fiction Stories",
-            price: "₹2,000 (Negotiable)",
-            location: "Faridabad, Haryana, India",
-            datePosted: "December 17, 2024",
-            views: 22,
-            imageUrl: image1,
-        },
-        {
-            id: 3,
-            title: "Objective NCERT at Your Fingertips",
-            category: "Medical Competitive Exam",
-            price: "₹700 (Fixed)",
-            location: "Gobichettipalayam, Erode",
-            datePosted: "December 16, 2024",
-            views: 12,
-            imageUrl: image1,
-        },
-        {
-            id: 4,
-            title: "Wave and Thermodynamics",
-            category: "Others Engineering",
-            price: "Price On Call",
-            location: "Lucknow",
-            datePosted: "December 16, 2024",
-            views: 17,
-            imageUrl: image1,
-        },
-    ];
+    const [books, setBooks] = useState([]);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const fetchFeatured = async () => {
+            const result = await dispatch(getAllPosts({ limit: 4 }));
+            if (result && result.length > 0) {
+                setBooks(result.slice(0, 4));
+            }
+        };
+        fetchFeatured();
+    }, [dispatch]);
 
     const [likedBooks, setLikedBooks] = useState([]);
 
@@ -69,7 +40,7 @@ function FeaturedBooks() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {books.map((book) => (
                         <div
-                            key={book.id}
+                            key={book._id}
                             className="card flex flex-col justify-between shadow hover:shadow-md cursor-pointer"
                             style={{
                                 boxShadow: "rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
@@ -77,8 +48,8 @@ function FeaturedBooks() {
                         >
                             <div className="relative overflow-hidden">
                                 <img
-                                    src={book.imageUrl}
-                                    alt={`${book.title} cover`}
+                                    src={book.Images?.[0] || "/placeholder.svg"}
+                                    alt={`${book.Title} cover`}
                                     className="w-full h-40 object-cover"
                                 />
                                 <span
@@ -91,11 +62,11 @@ function FeaturedBooks() {
                                 </span>
                                 <button
                                     className="absolute bottom-2 right-2 text-xl focus:outline-none hover:text-white "
-                                    onClick={() => handleLike(book.id)}
+                                    onClick={() => handleLike(book._id)}
                                 >
                                     <FaHeart
                                         className={`transition-colors duration-300 ${
-                                            likedBooks.includes(book.id) ? "text-[#ff2424]" : "text-[#f0f0f0]"
+                                            likedBooks.includes(book._id) ? "text-[#ff2424]" : "text-[#f0f0f0]"
                                         }`}
                                     />
                                 </button>
@@ -103,19 +74,19 @@ function FeaturedBooks() {
                             
 
                             <div className="mt-4 px-2 flex flex-col gap-1 pb-1">
-                                <p className="text-[#777777] text-xs">{book.category}</p>
+                                <p className="text-[#777777] text-xs">{book.Category}</p>
                                 <h3 className="text-lg font-light antialiased">
-                                    {book.title.length > 20 ? `${book.title.slice(0, 30)}...` : book.title}
+                                    {book.Title?.length > 20 ? `${book.Title.slice(0, 30)}...` : book.Title}
                                 </h3>
-                                <p className="text-[#E74C3C] font-semibold antialiased">{book.price}</p>
-                                <p className="text-sm text-[#777777]">{book.location}</p>
+                                <p className="text-[#E74C3C] font-semibold antialiased">₹{book.Price}</p>
+                                <p className="text-sm text-[#777777]">{book.City}</p>
                             </div>
                            
 
                             {/* Separate div for datePosted */}
                             <div className="bg-white px-2 py-2 mt-4">
                                 <p className="text-xs text-[#777777]">
-                                    {book.datePosted} | {book.views} Views
+                                    {new Date(book.postedAt).toLocaleDateString()} | {book.views || 0} Views
                                 </p>
                             </div>
                         </div>

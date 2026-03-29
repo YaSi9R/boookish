@@ -39,7 +39,7 @@ const Navbar = () => {
   }
 
   const [open, setOpen] = useState(false);
-  const toggleOpen = () => setOpen(!open);
+
 
   const [openDropdown, setOpenDropdown] = useState(null);
   console.log("Inside navbar", token);
