@@ -8,7 +8,6 @@ const { GET_ALL_POSTS_API, GET_POST_BY_ID_API, CREATE_POST_API, GET_MY_POSTS_API
 // Get all posts with filters
 export function getAllPosts(filters = {}) {
   return async (dispatch) => {
-    const toastId = toast.loading("Loading posts...")
     try {
       const queryParams = new URLSearchParams(filters).toString()
       const url = queryParams ? `${GET_ALL_POSTS_API}?${queryParams}` : GET_ALL_POSTS_API
@@ -19,14 +18,10 @@ export function getAllPosts(filters = {}) {
         throw new Error(response.data.message)
       }
 
-      toast.success("Posts loaded successfully")
       return response.data.data
     } catch (error) {
       console.log("GET ALL POSTS API ERROR............", error)
-      toast.error("Failed to load posts")
       return null
-    } finally {
-      toast.dismiss(toastId)
     }
   }
 }

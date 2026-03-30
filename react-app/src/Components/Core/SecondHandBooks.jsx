@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
 import { getAllPosts } from "../../services/operations/postAPI";
+import HomeCard from "./HomeCard";
 
 function SecondHandBooks() {
   const [books, setBooks] = useState([]);
@@ -8,7 +9,7 @@ function SecondHandBooks() {
 
   useEffect(() => {
     const fetchSecondHand = async () => {
-      const result = await dispatch(getAllPosts({ condition: "Used", limit: 8 }));
+      const result = await dispatch(getAllPosts({ condition: "Used", limit: 8, sort: "likes" }));
       if (result && result.length > 0) {
         setBooks(result);
       }
@@ -80,35 +81,7 @@ return (
           style={{ scrollBehavior: 'smooth' }}
         >
           {extendedBooks.map((book, index) => (
-            <div
-              key={index}
-              className="card flex flex-col justify-between shadow hover:shadow-md cursor-pointer w-full flex-shrink-0 snap-start rounded-lg bg-white md:w-[250px] "
-              style={{
-                boxShadow:
-                  'rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px',
-              }}
-            >
-              <div className="relative overflow-hidden">
-                <img
-                  src={book.Images?.[0] || "/placeholder.svg"}
-                  alt={`${book.Title} cover`}
-                  className="w-full md:h-40 h-60 object-cover"
-                />
-              </div>
-              <div className="mt-1 px-2 flex flex-col gap-1 pb-1">
-                <p className="text-[#777777] text-xs">{book.Category}</p>
-                <h3 className="text-lg font-light antialiased">
-                  {book.Title?.length > 20
-                    ? `${book.Title.slice(0, 30)}...`
-                    : book.Title } 
-                </h3>
-              </div>
-              <div className="px-2 py-2 mt-4">
-                <p className="text-[#E74C3C] font-semibold antialiased">
-                  ₹{book.Price}
-                </p>
-              </div>
-            </div>
+            <HomeCard key={index} book={book} isSlider={true} />
           ))}
         </div>
 

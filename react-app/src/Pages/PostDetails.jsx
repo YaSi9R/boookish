@@ -1,15 +1,17 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useSearchParams, Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { FaHeart, FaLocationDot, FaPhone } from "react-icons/fa6"
-import { getPostById } from "../services/operations/postAPI"
+import { FaHeart, FaLocationDot, FaArrowLeft } from "react-icons/fa6"
+import { getPostById, getAllPosts } from "../services/operations/postAPI"
 import { addToFavorites, removeFromFavorites } from "../services/operations/favoritesAPI"
 import { toast } from "react-toastify"
+import HomeCard from "../Components/Core/HomeCard"
 
-export default function PostDetails() {
-  const { id } = useParams()
+export default function PostDetails({ id: propId }) {
+  const [searchParams] = useSearchParams()
+  const id = propId || searchParams.get("id")
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.profile)
   const { token } = useSelector((state) => state.auth)
@@ -20,6 +22,7 @@ export default function PostDetails() {
 
   useEffect(() => {
     const fetchPost = async () => {
+      if (!id) return
       setLoading(true)
       const result = await dispatch(getPostById(id))
       if (result) {
@@ -69,6 +72,34 @@ export default function PostDetails() {
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-4">
+          <Link 
+            to={`/posts?category=${encodeURIComponent(post.Category)}&subCategory=${encodeURIComponent(post.subCategory)}`}
+            className="inline-flex items-center gap-2 text-[#E74C3C] hover:text-[#b52417] font-semibold transition-colors"
+          >
+            <FaArrowLeft />
+            Back to {post.subCategory} Books
+          </Link>
+        </div>
+        {/* Breadcrumbs */}
+        <nav className="flex items-center gap-2 text-sm text-gray-500 mb-6 font-medium">
+          <Link to="/" className="hover:text-[#E74C3C] transition-colors">Home</Link>
+          <span className="text-gray-300">/</span>
+          <Link 
+            to={`/posts?category=${encodeURIComponent(post.Category)}`} 
+            className="hover:text-[#E74C3C] transition-colors"
+          >
+            {post.Category}
+          </Link>
+          <span className="text-gray-300">/</span>
+          <Link 
+            to={`/posts?category=${encodeURIComponent(post.Category)}&subCategory=${encodeURIComponent(post.subCategory)}`} 
+            className="text-[#E74C3C] font-semibold"
+          >
+            {post.subCategory}
+          </Link>
+        </nav>
+
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-6">
             {/* Image Gallery */}
@@ -121,7 +152,10 @@ export default function PostDetails() {
                 </div>
                 <div className="flex items-center gap-4 mb-4">
                   <span className="text-4xl font-bold text-[#E74C3C]">₹{post.Price}</span>
-                  <span className="text-sm text-gray-500">({post.PriceType})</span>
+                  <div className="flex flex-col">
+                    <span className="text-sm text-gray-500">({post.PriceType})</span>
+                    <span className="text-xs text-blue-600 font-medium">{post.visits || 0} Views</span>
+                  </div>
                 </div>
               </div>
 
@@ -183,23 +217,73 @@ export default function PostDetails() {
                   <div>
                     <p className="font-medium text-gray-900">{post.Name}</p>
                     <p className="text-sm text-gray-600">
-                      Member since {new Date(post.seller?.createdAt).getFullYear()}
+                      Member since {post.seller?.createdAt ? new Date(post.seller.createdAt).getFullYear() : new Date().getFullYear()}
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 text-gray-600">
-                  <FaPhone className="w-4 h-4" />
-                  <span>{post.Number}</span>
-                </div>
               </div>
 
-              {/* Contact Button */}
-              <button className="w-full bg-[#E74C3C] text-white py-3 px-6 rounded-lg font-semibold hover:bg-[#b52417] transition-colors">
-                Contact Seller
-              </button>
+              {/* Action Buttons */}
+              <div className="flex gap-4 mb-6">
+                <button 
+                  onClick={handleFavoriteToggle}
+                  className={`flex-1 flex items-center justify-center gap-2 py-3 px-6 rounded-lg font-semibold border-2 transition-colors ${
+                    isFavorite 
+                    ? "bg-red-50 border-red-500 text-red-500" 
+                    : "bg-white border-gray-300 text-gray-700 hover:border-red-500 hover:text-red-500"
+                  }`}
+                >
+                  <FaHeart className={isFavorite ? "fill-current" : ""} />
+                  {isFavorite ? "Saved to Favourites" : "Add to Favourites"}
+                </button>
+                <button 
+                  onClick={() => toast.success("Chat feature coming soon!")}
+                  className="flex-1 bg-[#E74C3C] text-white py-3 px-6 rounded-lg font-semibold hover:bg-[#b52417] transition-colors"
+                >
+                  Chat Now
+                </button>
+              </div>
             </div>
           </div>
         </div>
+
+        {/* Related Books Section */}
+        <RelatedBooks subCategory={post.subCategory} currentPostId={post._id} />
+      </div>
+    </div>
+  )
+}
+
+function RelatedBooks({ subCategory, currentPostId }) {
+  const [relatedPosts, setRelatedPosts] = useState([])
+  const [loading, setLoading] = useState(false)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const fetchRelated = async () => {
+      setLoading(true)
+      const result = await dispatch(getAllPosts({ subCategory, limit: 10 }))
+      if (result) {
+        // Filter out the current post
+        const filtered = result.filter(p => p._id !== currentPostId).slice(0, 4)
+        setRelatedPosts(filtered)
+      }
+      setLoading(false)
+    }
+    if (subCategory) {
+      fetchRelated()
+    }
+  }, [subCategory, currentPostId, dispatch])
+
+  if (loading || relatedPosts.length === 0) return null
+
+  return (
+    <div className="mt-12">
+      <h2 className="text-2xl font-bold text-gray-900 mb-6">Related Books</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {relatedPosts.map((book) => (
+          <HomeCard key={book._id} book={book} />
+        ))}
       </div>
     </div>
   )

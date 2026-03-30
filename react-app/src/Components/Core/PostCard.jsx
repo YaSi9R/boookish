@@ -58,11 +58,21 @@ export default function PostCard({ post }) {
 
         <p className="text-gray-600 text-sm mb-4 line-clamp-2">{post.Description}</p>
 
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
+          <div className="flex gap-3 text-xs text-gray-500">
+            <span className="flex items-center gap-1">
+              <FaHeart className="w-3 h-3 text-red-400" />
+              {post.favoritesCount || 0}
+            </span>
+            <span>{post.visits || 0} views</span>
+          </div>
           <span className="text-xs text-gray-500">{new Date(post.postedAt).toLocaleDateString()}</span>
+        </div>
+        
+        <div className="mt-4">
           <Link
-            to={`/post/${post._id}`}
-            className="bg-[#E74C3C] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#b52417] transition-colors"
+            to={`/posts?category=${encodeURIComponent(post?.Category || "")}&subCategory=${encodeURIComponent(post?.subCategory || "")}&id=${post?._id}`}
+            className="block text-center bg-[#E74C3C] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#b52417] transition-colors w-full"
           >
             View Details
           </Link>

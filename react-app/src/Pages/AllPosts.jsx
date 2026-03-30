@@ -3,23 +3,41 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { getAllPosts } from "../services/operations/postAPI"
+import { useSearchParams } from "react-router-dom"
 import PostCard from "../Components/Core/PostCard"
+import PostDetails from "./PostDetails"
 
 export default function AllPosts() {
   const dispatch = useDispatch()
+  const [searchParams] = useSearchParams()
+  const postId = searchParams.get("id")
   const [posts, setPosts] = useState([])
+  // ... (rest of initial states)
   const [loading, setLoading] = useState(false)
   const [filters, setFilters] = useState({
-    category: "",
-    search: "",
-    city: "",
-    priceMin: "",
-    priceMax: "",
-    adType: "",
+    category: searchParams.get("category") || "",
+    subCategory: searchParams.get("subCategory") || "",
+    search: searchParams.get("search") || "",
+    city: searchParams.get("city") || "",
+    priceMin: searchParams.get("priceMin") || "",
+    priceMax: searchParams.get("priceMax") || "",
+    adType: searchParams.get("adType") || "",
   })
+
+  // To update filters dynamically if the URL changes
+  useEffect(() => {
+    setFilters(prev => ({
+      ...prev,
+      category: searchParams.get("category") || "",
+      subCategory: searchParams.get("subCategory") || "",
+    }))
+  }, [searchParams])
 
   useEffect(() => {
     const fetchPosts = async () => {
+      // Don't fetch list if we are showing details
+      if (postId) return;
+      
       setLoading(true)
       const result = await dispatch(getAllPosts(filters))
       if (result) {
@@ -28,7 +46,7 @@ export default function AllPosts() {
       setLoading(false)
     }
     fetchPosts()
-  }, [dispatch, filters])
+  }, [dispatch, filters, postId])
 
   const handleFilterChange = (key, value) => {
     setFilters((prev) => ({
@@ -43,6 +61,11 @@ export default function AllPosts() {
         <div className="spinner"></div>
       </div>
     )
+  }
+
+  // Show PostDetails if ID is present
+  if (postId) {
+    return <PostDetails id={postId} />
   }
 
   return (
@@ -69,6 +92,7 @@ export default function AllPosts() {
               <option value="Competitive Exam">Competitive Exam</option>
               <option value="Engineering">Engineering</option>
               <option value="Medical">Medical</option>
+              <option value="Novels">Novels</option>
               <option value="Stories">Stories</option>
               <option value="School Books">School Books</option>
               <option value="Magazines">Magazines</option>

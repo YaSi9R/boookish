@@ -1,5 +1,4 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import backgroundImage from '../assets/Images/website-background.png';
 import sectionImage from '../assets/Images/middle_Bg.jpg';
 import SellButton from '../Components/Core/SellButton';
@@ -22,17 +21,33 @@ import { PiHandHeartThin } from "react-icons/pi";
 
 
 const Home = () => {
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [searchTitle, setSearchTitle] = useState('');
+  const [location, setLocation] = useState('');
 
   const categories = [
-    { id: 1, name: 'Fiction' },
-    { id: 2, name: 'Non-Fiction' },
-    { id: 3, name: 'Science' },
-    { id: 4, name: 'Mathematics' },
-    { id: 5, name: 'History' },
-  ];
+    { id: 1, name: "Competitive Exam" },
+    { id: 2, name: "Engineering" },
+    { id: 3, name: "Magazines" },
+    { id: 4, name: "Management Books" },
+    { id: 5, name: "Medical" },
+    { id: 6, name: "Novels" },
+    { id: 7, name: "School Books" },
+    { id: 8, name: "Stories" },
+  ]
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const queryParams = new URLSearchParams();
+    if (selectedCategory) queryParams.append('category', selectedCategory);
+    if (searchTitle) queryParams.append('search', searchTitle);
+    if (location) queryParams.append('city', location);
+    
+    navigate(`/posts?${queryParams.toString()}`);
   };
 
   return (
@@ -59,13 +74,15 @@ const Home = () => {
 
           {/* Contact Form Section */}
           <div className="text-black bg-white shadow-2xl p-4 md:p-8 rounded-lg w-[90%] md:w-[500px] max-w-lg">
-            <form action="/my-handling-form-page" method="post">
+            <form onSubmit={handleSearch}>
               <p className="mb-4">
                 <label htmlFor="name" className="block text-base md:text-sm">Title</label>
                 <input
                   type="text"
                   id="name"
                   name="user_name"
+                  value={searchTitle}
+                  onChange={(e) => setSearchTitle(e.target.value)}
                   className="w-full p-3 md:p-2 border border-gray-300 text-base md:text-sm"
                   placeholder="What Are You Looking For..."
                 />
@@ -93,6 +110,8 @@ const Home = () => {
                   type="text"
                   id="searchLocation"
                   name="searchLocation"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
                   className="w-full p-3 md:p-2 border border-gray-300 text-base md:text-sm"
                   placeholder="Location..."
                 />
@@ -166,10 +185,10 @@ const Home = () => {
               </div>
             </div>
 
-            
+
             <div className="flex justify-center md:justify-end w-full h-auto md:w-[200px] min-h-[50px] sm:h-[60px]">
               <Link
-                to="./sellBook"
+                to="./dashboard/add-post"
                 className="btn bg-[#E74C3C] text-white px-4 py-2 sm:py-3 inline-flex items-center hover:bg-[#b52417] transition text-base sm:text-lg whitespace-nowrap"
               >
                 Post Free Ad <FaAngleDoubleRight className="ml-1" />
@@ -191,7 +210,7 @@ const Home = () => {
 
       <div>
         <Buyoldbooks />
-        
+
       </div>
 
 
