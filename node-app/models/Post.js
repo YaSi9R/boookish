@@ -15,6 +15,7 @@ const postSchema = new mongoose.Schema({
       "Magazines",
       "Management Books",
       "Medical",
+      "Novels",
       "School Books",
       "Stories"
     ],
@@ -98,6 +99,14 @@ const postSchema = new mongoose.Schema({
   postedAt: {
     type: Date,
     default: Date.now,
+  },
+  favoritesCount: {
+    type: Number,
+    default: 0,
+  },
+  visits: {
+    type: Number,
+    default: 0,
   },
   seller: {
     type: mongoose.Schema.Types.ObjectId,

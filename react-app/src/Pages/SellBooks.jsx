@@ -36,6 +36,7 @@ export default function SellBook() {
     "Magazines",
     "Management Books",
     "Medical",
+    "Novels",
     "School Books",
     "Stories",
   ]
@@ -46,6 +47,7 @@ export default function SellBook() {
     Magazines: ["Science", "Fashion", "Tech", "Entertainment", "News", "Other"],
     "Management Books": ["Finance", "Marketing", "HR", "Leadership", "Strategy", "Other"],
     Medical: ["Anatomy", "Pharmacology", "Surgery", "Pathology", "Nursing", "Other"],
+    Novels: ["Fiction", "Non-Fiction", "Romance", "Mystery", "Thriller", "Sci-Fi", "Fantasy", "Other"],
     "School Books": ["Mathematics", "Science", "History", "Geography", "English", "Other"],
     Stories: ["Fiction", "Non-Fiction", "Comics", "Short Stories", "Novels", "Other"],
   }

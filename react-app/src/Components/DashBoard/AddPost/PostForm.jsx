@@ -175,6 +175,7 @@ export default function PostForm() {
     "Magazines",
     "Management Books",
     "Medical",
+    "Novels",
     "School Books",
     "Stories",
   ]
@@ -185,6 +186,7 @@ export default function PostForm() {
     Magazines: ["Science", "Fashion", "Tech", "Entertainment"],
     "Management Books": ["Finance", "Marketing", "HR", "Leadership"],
     Medical: ["Anatomy", "Pharmacology", "Surgery", "Pathology"],
+    Novels: ["Fiction", "Non-Fiction", "Romance", "Mystery", "Thriller", "Sci-Fi", "Fantasy", "Other"],
     "School Books": ["Mathematics", "Science", "History", "Geography"],
     Stories: ["Fiction", "Non-Fiction", "Comics", "Short Stories"],
   }

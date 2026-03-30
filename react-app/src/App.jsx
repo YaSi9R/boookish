@@ -8,6 +8,7 @@ import Login from "./Pages/Login"
 import Signup from "./Pages/Signup"
 import OpenRoute from "./Components/Core/Auth/OpenRoute"
 import Home from "./Pages/Home"
+import FooterBackground from "./Components/Common/FooterBackground"
 import { Link } from "react-router-dom"
 import PrivateRoute from "./Components/Core/Auth/PrivateRoute"
 import { useEffect } from "react"
@@ -22,9 +23,9 @@ import Settings from "./Pages/Dashboard/Settings"
 import SellBooks from "./Pages/SellBooks"
 import EditPost from "./Pages/Dashboard/EditPost"
 import Favorites from "./Pages/Dashboard/Favorites"
-import PostDetails from "./Pages/PostDetails"
 import AllPosts from "./Pages/AllPosts"
 import Error from "./Pages/Error"
+import ScrollToTop from "./Components/Core/ScrollToTop"
 
 function App() {
   const dispatch = useDispatch()
@@ -43,11 +44,11 @@ function App() {
 
   return (
     <div className="flex min-h-screen w-screen flex-col bg-white font-inter">
+      <ScrollToTop />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/posts" element={<AllPosts />} />
-        <Route path="/post/:id" element={<PostDetails />} />
 
         {/* Open routes for only non-logged-in users */}
         <Route
@@ -106,6 +107,8 @@ function App() {
           </button>
         </Link>
       )}
+      
+      <FooterBackground />
     </div>
   )
 }

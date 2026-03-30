@@ -101,11 +101,12 @@ exports.getAllPosts = async (req, res) => {
       search,
       page = 1,
       limit = 10,
+      sort,
     } = req.query
 
     // Build filter object
     const filter = {}
-
+    // ... (rest of filter logic)
     if (category) filter.Category = category
     if (subCategory) filter.subCategory = subCategory
     if (adType) filter.adType = adType
@@ -127,10 +128,20 @@ exports.getAllPosts = async (req, res) => {
     // Calculate pagination
     const skip = (Number(page) - 1) * Number(limit)
 
+    // Build sort object
+    let sortObj = { postedAt: -1 } // Default: Recent
+    if (sort === "likes") {
+      sortObj = { favoritesCount: -1 }
+    } else if (sort === "visits") {
+      sortObj = { visits: -1 }
+    } else if (sort === "recent") {
+      sortObj = { postedAt: -1 }
+    }
+
     // Get posts with pagination
     const posts = await Post.find(filter)
       .populate("seller", "Name email contactNumber image")
-      .sort({ postedAt: -1 })
+      .sort(sortObj)
       .skip(skip)
       .limit(Number(limit))
 
@@ -164,7 +175,11 @@ exports.getPostById = async (req, res) => {
   try {
     const { id } = req.params
 
-    const post = await Post.findById(id).populate("seller", "Name email contactNumber image college location")
+    const post = await Post.findByIdAndUpdate(
+      id, 
+      { $inc: { visits: 1 } }, 
+      { new: true }
+    ).populate("seller", "Name email contactNumber image college location")
 
     if (!post) {
       return res.status(404).json({

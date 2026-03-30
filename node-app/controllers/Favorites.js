@@ -28,6 +28,9 @@ exports.addToFavorites = async (req, res) => {
     // Add to favorites
     await User.findByIdAndUpdate(userId, { $push: { favorites: postId } }, { new: true })
 
+    // Increment favoritesCount on Post
+    await Post.findByIdAndUpdate(postId, { $inc: { favoritesCount: 1 } })
+
     res.status(200).json({
       success: true,
       message: "Post added to favorites successfully",
@@ -50,6 +53,9 @@ exports.removeFromFavorites = async (req, res) => {
 
     // Remove from favorites
     await User.findByIdAndUpdate(userId, { $pull: { favorites: postId } }, { new: true })
+
+    // Decrement favoritesCount on Post
+    await Post.findByIdAndUpdate(postId, { $inc: { favoritesCount: -1 } })
 
     res.status(200).json({
       success: true,

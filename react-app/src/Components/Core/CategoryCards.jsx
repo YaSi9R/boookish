@@ -10,54 +10,54 @@ import image6 from '../../assets/iconsImage/SchoolBooks.png';
 function CategoryCards() {
   const categories = [
     {
-      id: '1',
+      id: "1",
       image: image2,
-      title: 'Medical',
-      ads: '483 Ads',
-      description: 'Homeopathy, MBBS, Medicine, Nursing',
-      bgColor: 'bg-[#d5658d]',
+      title: "Medical",
+      ads: "483 Ads",
+      description: "Homeopathy, MBBS, Medicine, Nursing",
+      bgColor: "bg-[#d5658d]",
     },
     {
-      id: '2',
+      id: "2",
       image: image1,
-      title: 'Engineering Exams',
-      ads: '325 Ads',
-      description: 'Mechanical, Civil, Electrical, Computer Science',
-      bgColor: 'bg-[#9b59b6]',
+      title: "Engineering",
+      ads: "325 Ads",
+      description: "Mechanical, Civil, Electrical, Computer Science",
+      bgColor: "bg-[#9b59b6]",
     },
     {
-      id: '3',
+      id: "3",
       image: image3,
-      title: 'Competitive Exams',
-      ads: '2150 Ads',
-      description: 'CAT|GATE|GRE, Engineering Exams, IBPS PO, Management',
-      bgColor: 'bg-[#2ecc71]',
+      title: "Competitive Exam",
+      ads: "2150 Ads",
+      description: "CAT|GATE|GRE, Engineering Exams, IBPS PO, Management",
+      bgColor: "bg-[#2ecc71]",
     },
     {
-      id: '4',
+      id: "4",
       image: image4,
-      title: 'Stories',
-      ads: '707 Ads',
-      description: 'Comics, Fiction, Non-Fiction, Others',
-      bgColor: 'bg-[#3498db]',
+      title: "Stories",
+      ads: "707 Ads",
+      description: "Comics, Fiction, Non-Fiction, Others",
+      bgColor: "bg-[#3498db]",
     },
     {
-      id: '5',
+      id: "5",
       image: image5,
-      title: 'Magazines',
-      ads: '51 Ads',
-      description: 'Automobile, Bollywood/Hollywood, Business & Law, Education',
-      bgColor: 'bg-[#f05458]',
+      title: "Magazines",
+      ads: "51 Ads",
+      description: "Automobile, Bollywood/Hollywood, Business & Law, Education",
+      bgColor: "bg-[#f05458]",
     },
     {
-      id: '6',
+      id: "6",
       image: image6,
-      title: 'SchoolBooks',
-      ads: '5001 Ads',
-      description: 'Arts, Commerce, Science, Others',
-      bgColor: 'bg-[#34495e]',
+      title: "School Books",
+      ads: "5001 Ads",
+      description: "Arts, Commerce, Science, Others",
+      bgColor: "bg-[#34495e]",
     },
-  ];
+  ]
 
   return (
     <div className="relative">
@@ -80,7 +80,7 @@ function CategoryCards() {
               <p className="text-xs md:text-sm mb-4 md:mb-6 text-center px-2">
                 {category.description}
               </p>
-              <Link to={category.title}>
+              <Link to={`/posts?category=${encodeURIComponent(category.title)}`}>
                 <button className="border border-white px-3 py-1 md:px-4 md:py-2 hover:bg-white hover:text-black transition">
                   VIEW ALL
                 </button>
@@ -107,7 +107,7 @@ function CategoryCards() {
               <h3 className="text-2xl font-semibold mb-2">{category.title}</h3>
               <p className="text-lg mb-2">{category.ads}</p>
               <p className="text-sm mb-6 text-center px-4 whitespace-normal break-words">{category.description}</p>
-              <Link to={category.title}>
+              <Link to={`/posts?category=${encodeURIComponent(category.title)}`}>
                 <button className="border border-white px-4 py-2 hover:bg-white hover:text-black transition">
                   VIEW ALL
                 </button>
