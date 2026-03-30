@@ -6,7 +6,6 @@ import HomeWideCard from "./HomeWideCard";
 const Buyoldbooks = () => {
     const [ads, setAds] = useState([]);
     const [filteredAds, setFilteredAds] = useState([]);
-    const [likedBooks, setLikedBooks] = useState([]);
     const dispatch = useDispatch();
 
     useEffect(() => {

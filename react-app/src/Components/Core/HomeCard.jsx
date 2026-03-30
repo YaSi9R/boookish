@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 
 export default function HomeCard({ book, isFeatured, isSlider }) {
     const { user } = useSelector((state) => state.profile);
     const { token } = useSelector((state) => state.auth);
-    const dispatch = useDispatch();
     const [isFavorite, setIsFavorite] = useState(user?.favorites?.includes(book?._id) || false);
 
     const handleLike = (e) => {
