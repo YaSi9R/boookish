@@ -24,6 +24,7 @@ import SellBooks from "./Pages/SellBooks"
 import EditPost from "./Pages/Dashboard/EditPost"
 import Favorites from "./Pages/Dashboard/Favorites"
 import AllPosts from "./Pages/AllPosts"
+import Chats from "./Pages/Chats"
 import Error from "./Pages/Error"
 import ScrollToTop from "./Components/Core/ScrollToTop"
 
@@ -90,6 +91,7 @@ function App() {
           <Route path="/dashboard/add-post" element={<SellBooks />} />
           <Route path="/dashboard/edit-post/:postId" element={<EditPost />} />
           <Route path="/dashboard/favorites" element={<Favorites />} />
+          <Route path="/chats" element={<Chats />} />
         </Route>
 
         {/* 404 Error Route */}

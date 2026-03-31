@@ -32,6 +32,7 @@ const postSchema = new mongoose.Schema({
           "Magazines": ["Science", "Fashion", "Tech", "Entertainment", "News", "Other"],
           "Management Books": ["Finance", "Marketing", "HR", "Leadership", "Strategy", "Other"],
           "Medical": ["Anatomy", "Pharmacology", "Surgery", "Pathology", "Nursing", "Other"],
+          "Novels": ["Fiction", "Non-Fiction", "Romance", "Mystery", "Thriller", "Sci-Fi", "Fantasy", "Other"],
           "School Books": ["Mathematics", "Science", "History", "Geography", "English", "Other"],
           "Stories": ["Fiction", "Non-Fiction", "Comics", "Short Stories", "Novels", "Other"]
         };

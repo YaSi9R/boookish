@@ -181,7 +181,7 @@ export default function PostForm() {
   ]
 
   const subCategories = {
-    Competitive_Exam: ["UPSC", "SSC", "Banking", "Railway"],
+    "Competitive Exam": ["UPSC", "SSC", "Banking", "Railway"],
     Engineering: ["Computer Science", "Mechanical", "Electrical", "Civil"],
     Magazines: ["Science", "Fashion", "Tech", "Entertainment"],
     "Management Books": ["Finance", "Marketing", "HR", "Leadership"],
