@@ -47,7 +47,7 @@ exports.createPost = async (req, res) => {
     }
 
     for (const img of images) {
-      const uploaded = await uploadImageToCloudinary(img, process.env.FOLDER_NAME);
+      const uploaded = await uploadImageToCloudinary(img, process.env.FOLDER_NAME || "Bookish");
       imagesArray.push(uploaded.secure_url);
     }
 
