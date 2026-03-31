@@ -42,3 +42,11 @@ export const favoritesEndpoints = {
   GET_FAVORITES_API: BASE_URL + "/favorites",
   CHECK_FAVORITE_API: BASE_URL + "/favorites/check",
 }
+
+// CHAT ENDPOINTS
+export const chatEndpoints = {
+    GET_OR_CREATE_CONVERSATION_API: BASE_URL + "/chat/get-or-create",
+    GET_USER_CONVERSATIONS_API: BASE_URL + "/chat/conversations",
+    GET_MESSAGES_API: BASE_URL + "/chat/messages",
+    SEND_MESSAGE_API: BASE_URL + "/chat/send",
+}

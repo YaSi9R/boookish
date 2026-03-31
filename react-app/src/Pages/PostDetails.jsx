@@ -1,12 +1,13 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useSearchParams, Link } from "react-router-dom"
+import { useSearchParams, Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { FaHeart, FaLocationDot, FaArrowLeft } from "react-icons/fa6"
+import { FaHeart, FaLocationDot, FaArrowLeft, FaMessage } from "react-icons/fa6"
 import { getPostById, getAllPosts } from "../services/operations/postAPI"
+import { getOrCreateConversation } from "../services/operations/chatAPI"
 import { addToFavorites, removeFromFavorites } from "../services/operations/favoritesAPI"
-import { toast } from "react-toastify"
+import { toast } from "react-hot-toast"
 import HomeCard from "../Components/Core/HomeCard"
 
 export default function PostDetails({ id: propId }) {
@@ -19,6 +20,7 @@ export default function PostDetails({ id: propId }) {
   const [loading, setLoading] = useState(false)
   const [isFavorite, setIsFavorite] = useState(false)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -52,6 +54,62 @@ export default function PostDetails({ id: propId }) {
       }
     }
   }
+
+  const handleChat = async () => {
+    console.log("Chat button clicked");
+    if (!token) {
+      toast.error("Please login to chat with the seller");
+      return;
+    }
+
+    if (!user) {
+      console.log("User missing:", user);
+      toast.error("User data not loaded yet. Please wait a moment.");
+      return;
+    }
+
+    if (!post) {
+      console.log("Post missing:", post);
+      toast.error("Post data not loaded yet. Please wait a moment.");
+      return;
+    }
+
+    // Standardize IDs (some objects might have .id while others have ._id)
+    const currentUserId = user._id || user.id;
+    const sellerId = post.seller?._id || post.seller;
+
+    console.log("Initiating chat:", { currentUserId, sellerId, postId: post._id });
+
+    if (!sellerId) {
+      toast.error("Seller information is missing from this post");
+      return;
+    }
+
+    if (currentUserId === sellerId) {
+      toast.error("This is your own post. You cannot chat with yourself.");
+      return;
+    }
+
+    setLoading(true);
+    const loadingToast = toast.loading("Initiating chat...");
+    try {
+      const conversation = await dispatch(getOrCreateConversation(sellerId, post._id, token));
+      toast.dismiss(loadingToast);
+      
+      if (conversation) {
+        toast.success("Opening chat...");
+        navigate(`/chats?id=${conversation._id}`);
+      } else {
+        toast.error("Could not create conversation. Check console.");
+      }
+    } catch (error) {
+      toast.dismiss(loadingToast);
+      console.error("Chat initiation failed:", error);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -237,9 +295,10 @@ export default function PostDetails({ id: propId }) {
                   {isFavorite ? "Saved to Favourites" : "Add to Favourites"}
                 </button>
                 <button 
-                  onClick={() => toast.success("Chat feature coming soon!")}
-                  className="flex-1 bg-[#E74C3C] text-white py-3 px-6 rounded-lg font-semibold hover:bg-[#b52417] transition-colors"
+                  onClick={handleChat}
+                  className="flex-1 bg-[#E74C3C] text-white py-3 px-6 rounded-lg font-semibold hover:bg-[#b52417] transition-colors flex items-center justify-center gap-2"
                 >
+                  <FaMessage />
                   Chat Now
                 </button>
               </div>
